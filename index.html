@@ -855,18 +855,18 @@
 (function () {
   const TOTAL   = 300;
   const START   = 1;
-  const FOLDER  = '3d%20files/';
+  const FOLDER  = '3d files/'; // Literal space
   const PREFIX  = 'ezgif-frame-';
   const EXT     = '.jpg';
-  // ────────────────────────────────────────────────────
 
-  const canvas   = document.getElementById('bg-canvas');
-  const ctx      = canvas.getContext('2d');
+  const canvas    = document.getElementById('bg-canvas');
+  const ctx       = canvas.getContext('2d');
   const preloader = document.getElementById('preloader');
-  const barFill  = document.getElementById('bar-fill');
-  const pctText  = document.getElementById('pct-text');
+  const barFill   = document.getElementById('bar-fill');
+  const pctText   = document.getElementById('pct-text');
 
-  // Keep canvas full-screen
+  console.log('Scroll animation preloading started...');
+
   function resizeCanvas() {
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -875,94 +875,84 @@
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  // Build frame filename with 3-digit padding
   function frameSrc(i) {
     const num = (START + i).toString().padStart(3, '0');
-    return `${FOLDER}${PREFIX}${num}${EXT}`;
+    return FOLDER + PREFIX + num + EXT;
   }
 
-  // Preload all frames
   const images = new Array(TOTAL);
-  let loaded   = 0;
+  let loaded = 0;
+  let currentFrame = 0;
 
   function preload() {
+    console.log('Preloading', TOTAL, 'images from', FOLDER);
     return new Promise((resolve) => {
       for (let i = 0; i < TOTAL; i++) {
-        const img  = new Image();
-        img.src    = frameSrc(i);
+        const img = new Image();
         img.onload = () => {
           loaded++;
-          const pct = Math.round((loaded / TOTAL) * 100);
-          barFill.style.width = pct + '%';
-          pctText.textContent = 'Loading... ' + pct + '%';
+          updateProgress();
           if (loaded === TOTAL) resolve();
         };
-        img.onerror = () => {
+        img.onerror = (e) => {
+          console.error('Failed to load image:', img.src, e);
           loaded++;
-          const pct = Math.round((loaded / TOTAL) * 100);
-          barFill.style.width = pct + '%';
-          pctText.textContent = 'Loading... ' + pct + '%';
+          updateProgress();
           if (loaded === TOTAL) resolve();
         };
+        img.src = frameSrc(i);
         images[i] = img;
       }
     });
   }
 
-  // Draw a single frame — cover-fit to canvas
-  let currentFrame = 0;
+  function updateProgress() {
+    const pct = Math.round((loaded / TOTAL) * 100);
+    barFill.style.width = pct + '%';
+    pctText.textContent = 'Loading... ' + pct + '%';
+  }
 
   function drawFrame(idx) {
     idx = Math.max(0, Math.min(TOTAL - 1, idx));
     currentFrame = idx;
     const img = images[idx];
     if (!img || !img.complete || !img.naturalWidth) return;
-
-    const cw = canvas.width,  ch = canvas.height;
+    const cw = canvas.width, ch = canvas.height;
     const iw = img.naturalWidth, ih = img.naturalHeight;
     const scale = Math.max(cw / iw, ch / ih);
     const dw = iw * scale, dh = ih * scale;
     const dx = (cw - dw) / 2, dy = (ch - dh) / 2;
-
     ctx.clearRect(0, 0, cw, ch);
     ctx.drawImage(img, dx, dy, dw, dh);
   }
 
-  // Scroll → frame mapping
   let rafPending = false;
-
   function onScroll() {
     if (rafPending) return;
     rafPending = true;
     requestAnimationFrame(() => {
       rafPending = false;
-      const scrollTop  = window.scrollY;
-      const maxScroll  = document.documentElement.scrollHeight - window.innerHeight;
-      const progress   = maxScroll > 0 ? scrollTop / maxScroll : 0;
-      const frameIndex = Math.floor(progress * (TOTAL - 1));
-      drawFrame(frameIndex);
+      const scrollTop = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
+      drawFrame(Math.floor(progress * (TOTAL - 1)));
     });
   }
 
-  // Boot
-  preload().then(() => {
-    // Fade out preloader
-    preloader.style.opacity = '0';
-    setTimeout(() => preloader.style.display = 'none', 600);
-
-    // Draw frame 0
-    drawFrame(0);
-
-    // Activate scroll listener
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    // Ensure enough scroll room for all 300 frames
-    // (adds scroll height only if the page is too short)
-    const needed = TOTAL * 6;
-    if (document.documentElement.scrollHeight < needed) {
-      document.body.style.minHeight = needed + 'px';
-    }
-  });
+  // Use a small delay to ensure UI is ready
+  setTimeout(() => {
+    preload().then(() => {
+      console.log('Preloading complete.');
+      preloader.style.opacity = '0';
+      setTimeout(() => { preloader.style.display = 'none'; }, 600);
+      drawFrame(0);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      const needed = TOTAL * 6;
+      if (document.documentElement.scrollHeight < needed) {
+        document.body.style.minHeight = needed + 'px';
+      }
+    }).catch(err => console.error('Preload failed:', err));
+  }, 100);
 
 })();
 </script>
