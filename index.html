@@ -855,7 +855,7 @@
 (function () {
   const TOTAL   = 300;
   const START   = 1;
-  const FOLDER  = '3d files/'; // Literal space
+  const FOLDER  = 'frames/';
   const PREFIX  = 'ezgif-frame-';
   const EXT     = '.jpg';
 
@@ -864,8 +864,6 @@
   const preloader = document.getElementById('preloader');
   const barFill   = document.getElementById('bar-fill');
   const pctText   = document.getElementById('pct-text');
-
-  console.log('Scroll animation preloading started...');
 
   function resizeCanvas() {
     canvas.width  = window.innerWidth;
@@ -876,7 +874,7 @@
   window.addEventListener('resize', resizeCanvas);
 
   function frameSrc(i) {
-    const num = (START + i).toString().padStart(3, '0');
+    const num = String(START + i).padStart(3, '0');
     return FOLDER + PREFIX + num + EXT;
   }
 
@@ -885,31 +883,27 @@
   let currentFrame = 0;
 
   function preload() {
-    console.log('Preloading', TOTAL, 'images from', FOLDER);
     return new Promise((resolve) => {
       for (let i = 0; i < TOTAL; i++) {
         const img = new Image();
         img.onload = () => {
           loaded++;
-          updateProgress();
+          const pct = Math.round((loaded / TOTAL) * 100);
+          barFill.style.width = pct + '%';
+          pctText.textContent = 'Loading... ' + pct + '%';
           if (loaded === TOTAL) resolve();
         };
-        img.onerror = (e) => {
-          console.error('Failed to load image:', img.src, e);
+        img.onerror = () => {
           loaded++;
-          updateProgress();
+          const pct = Math.round((loaded / TOTAL) * 100);
+          barFill.style.width = pct + '%';
+          pctText.textContent = 'Loading... ' + pct + '%';
           if (loaded === TOTAL) resolve();
         };
         img.src = frameSrc(i);
         images[i] = img;
       }
     });
-  }
-
-  function updateProgress() {
-    const pct = Math.round((loaded / TOTAL) * 100);
-    barFill.style.width = pct + '%';
-    pctText.textContent = 'Loading... ' + pct + '%';
   }
 
   function drawFrame(idx) {
@@ -927,6 +921,7 @@
   }
 
   let rafPending = false;
+
   function onScroll() {
     if (rafPending) return;
     rafPending = true;
@@ -934,25 +929,21 @@
       rafPending = false;
       const scrollTop = window.scrollY;
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
+      const progress  = maxScroll > 0 ? scrollTop / maxScroll : 0;
       drawFrame(Math.floor(progress * (TOTAL - 1)));
     });
   }
 
-  // Use a small delay to ensure UI is ready
-  setTimeout(() => {
-    preload().then(() => {
-      console.log('Preloading complete.');
-      preloader.style.opacity = '0';
-      setTimeout(() => { preloader.style.display = 'none'; }, 600);
-      drawFrame(0);
-      window.addEventListener('scroll', onScroll, { passive: true });
-      const needed = TOTAL * 6;
-      if (document.documentElement.scrollHeight < needed) {
-        document.body.style.minHeight = needed + 'px';
-      }
-    }).catch(err => console.error('Preload failed:', err));
-  }, 100);
+  preload().then(() => {
+    preloader.style.opacity = '0';
+    setTimeout(() => { preloader.style.display = 'none'; }, 600);
+    drawFrame(0);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    const needed = TOTAL * 6;
+    if (document.documentElement.scrollHeight < needed) {
+      document.body.style.minHeight = needed + 'px';
+    }
+  });
 
 })();
 </script>
