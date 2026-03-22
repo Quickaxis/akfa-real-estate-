@@ -113,7 +113,7 @@
 </div>
 <div class="flex items-center gap-6">
 
-<button class="bg-navy-dark text-white px-8 py-3 rounded-full text-sm font-bold hover:bg-primary transition-all active:scale-95 shadow-lg shadow-navy-dark/10">
+<button class="book-visit-btn bg-navy-dark text-white px-8 py-3 rounded-full text-sm font-bold hover:bg-primary transition-all active:scale-95 shadow-lg shadow-navy-dark/10">
                     Book Visit
                 </button>
 </div>
@@ -156,6 +156,9 @@
 </svg>
             WhatsApp Us
         </a>
+        <button class="book-visit-btn w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-navy-dark transition-all shadow-lg shadow-primary/20 whitespace-nowrap">
+            <span class="material-symbols-outlined text-xl">calendar_month</span> Book Visit
+        </button>
 </div>
 </div>
 </div>
@@ -549,7 +552,7 @@
 </a>
 
     <!-- Booking Modal -->
-    <div id="bookingModal" class="fixed inset-0 z-[100] bg-navy-dark/60 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300 ease-out">
+    <div id="bookModal" class="fixed inset-0 z-[100] bg-navy-dark/60 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300 ease-out">
         <div class="modal-content bg-white rounded-[2.5rem] shadow-2xl max-w-2xl w-full relative overflow-hidden transform scale-95 transition-all duration-500 ease-out border border-white/20">
             <!-- Close Button -->
             <button id="closeModal" class="absolute top-6 right-6 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-slate-100/50 hover:bg-primary/10 text-navy-dark/40 hover:text-primary transition-all">
@@ -602,7 +605,7 @@
 
     <script id="modal-logic">
         document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('bookingModal');
+            const modal = document.getElementById('bookModal');
             const closeBtn = document.getElementById('closeModal');
 
             const openModal = () => {
@@ -619,16 +622,19 @@
                 document.body.style.overflow = '';
             };
 
-            // Targeted open buttons
-            document.querySelectorAll('button').forEach(btn => {
-                if (btn.textContent.trim().includes('Book Visit') || btn.textContent.trim().includes('Book Now')) {
-                    btn.addEventListener('click', openModal);
-                }
+            // Targeted open buttons using class
+            document.querySelectorAll('.book-visit-btn').forEach(btn => {
+                btn.addEventListener('click', openModal);
             });
 
-            // Special handling for the "Book Now" tile
-            const bookNowTile = Array.from(document.querySelectorAll('div.cursor-pointer')).find(el => el.textContent.includes('Book Now'));
-            if (bookNowTile) bookNowTile.addEventListener('click', openModal);
+            // Fallback for any other "Book Visit" text buttons
+            document.querySelectorAll('button').forEach(btn => {
+                if (btn.textContent.trim().includes('Book Visit') || btn.textContent.trim().includes('Book Now')) {
+                    if (!btn.classList.contains('book-visit-btn')) {
+                        btn.addEventListener('click', openModal);
+                    }
+                }
+            });
 
             closeBtn.addEventListener('click', closeModalFunc);
             modal.addEventListener('click', (e) => {
