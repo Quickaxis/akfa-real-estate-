@@ -161,8 +161,80 @@
             animation: pulse-glow 3s ease-in-out infinite;
         }
     </style>
+
+  <style>
+  #bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    object-fit: cover;
+  }
+
+  body {
+    background: #000;
+  }
+
+  #preloader {
+    position: fixed;
+    inset: 0;
+    background: #050514;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: opacity 0.6s ease;
+  }
+
+  #preloader .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #fff;
+    letter-spacing: 3px;
+    margin-bottom: 32px;
+  }
+
+  #preloader .bar-track {
+    width: 280px;
+    height: 3px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  #preloader .bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #1d4ed8, #60a5fa);
+    border-radius: 2px;
+    transition: width 0.15s ease;
+  }
+
+  #preloader .pct-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 14px;
+    letter-spacing: 1px;
+  }
+  </style>
 </head>
 <body class="bg-background font-body text-on-surface min-h-screen selection:bg-primary selection:text-white dot-grid">
+
+<!-- Preloader -->
+<div id="preloader">
+  <div class="brand">AKFA REAL ESTATE</div>
+  <div class="bar-track">
+    <div class="bar-fill" id="bar-fill"></div>
+  </div>
+  <div class="pct-text" id="pct-text">Loading... 0%</div>
+</div>
+
+<!-- Background Canvas -->
+<canvas id="bg-canvas"></canvas>
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
 <div class="flex justify-between items-center w-full px-8 py-5 max-w-[1440px] mx-auto">
@@ -778,4 +850,114 @@
             });
         });
     </script>
+
+<script>
+(function () {
+  // ── CONFIG ──────────────────────────────────────────
+  const TOTAL    = 300;
+  const START    = 284;          // first frame number
+  const FOLDER   = '3d files/';  // folder containing frames
+  const PREFIX   = 'ezgif-frame-';
+  const EXT      = '.jpg';
+  // ────────────────────────────────────────────────────
+
+  const canvas   = document.getElementById('bg-canvas');
+  const ctx      = canvas.getContext('2d');
+  const preloader = document.getElementById('preloader');
+  const barFill  = document.getElementById('bar-fill');
+  const pctText  = document.getElementById('pct-text');
+
+  // Keep canvas full-screen
+  function resizeCanvas() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    drawFrame(currentFrame);
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  // Build frame filename
+  function frameSrc(i) {
+    return `${FOLDER}${PREFIX}${START + i}${EXT}`;
+  }
+
+  // Preload all frames
+  const images = new Array(TOTAL);
+  let loaded   = 0;
+
+  function preload() {
+    return new Promise((resolve) => {
+      for (let i = 0; i < TOTAL; i++) {
+        const img  = new Image();
+        img.src    = frameSrc(i);
+        img.onload = img.onerror = () => {
+          loaded++;
+          const pct = Math.round((loaded / TOTAL) * 100);
+          barFill.style.width = pct + '%';
+          pctText.textContent = `Loading... ${pct}%`;
+          if (loaded === TOTAL) resolve();
+        };
+        images[i] = img;
+      }
+    });
+  }
+
+  // Draw a single frame — cover-fit to canvas
+  let currentFrame = 0;
+
+  function drawFrame(idx) {
+    idx = Math.max(0, Math.min(TOTAL - 1, idx));
+    currentFrame = idx;
+    const img = images[idx];
+    if (!img || !img.complete || !img.naturalWidth) return;
+
+    const cw = canvas.width,  ch = canvas.height;
+    const iw = img.naturalWidth, ih = img.naturalHeight;
+    const scale = Math.max(cw / iw, ch / ih);
+    const dw = iw * scale, dh = ih * scale;
+    const dx = (cw - dw) / 2, dy = (ch - dh) / 2;
+
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(img, dx, dy, dw, dh);
+  }
+
+  // Scroll → frame mapping
+  let rafPending = false;
+
+  function onScroll() {
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      rafPending = false;
+      const scrollTop  = window.scrollY;
+      const maxScroll  = document.documentElement.scrollHeight - window.innerHeight;
+      const progress   = maxScroll > 0 ? scrollTop / maxScroll : 0;
+      const frameIndex = Math.floor(progress * (TOTAL - 1));
+      drawFrame(frameIndex);
+    });
+  }
+
+  // Boot
+  preload().then(() => {
+    // Fade out preloader
+    preloader.style.opacity = '0';
+    setTimeout(() => preloader.style.display = 'none', 600);
+
+    // Draw frame 0
+    drawFrame(0);
+
+    // Activate scroll listener
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Ensure enough scroll room for all 300 frames
+    // (adds scroll height only if the page is too short)
+    const needed = TOTAL * 6;
+    if (document.documentElement.scrollHeight < needed) {
+      document.body.style.minHeight = needed + 'px';
+    }
+  });
+
+})();
+</script>
+
 </body></html>
