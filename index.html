@@ -89,6 +89,77 @@
         .animate-pulse-green {
             animation: pulse-green 2s infinite;
         }
+        .depth-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(29, 111, 207, 0.05));
+            box-shadow: 
+                8px 8px 16px rgba(29, 111, 207, 0.1),
+                -4px -4px 12px rgba(255, 255, 255, 0.8),
+                inset 2px 2px 4px rgba(255, 255, 255, 0.5);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(59, 158, 255, 0.1);
+        }
+        .depth-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .depth-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 
+                25px 25px 50px rgba(29, 111, 207, 0.15),
+                -10px -10px 25px rgba(255, 255, 255, 0.9);
+            border-color: rgba(59, 158, 255, 0.4);
+        }
+        .active-3d-card {
+            background: linear-gradient(145deg, #1d6fcf, #0a192f) !important;
+            box-shadow: 
+                12px 12px 30px rgba(10, 25, 47, 0.3),
+                inset 2px 2px 10px rgba(255, 255, 255, 0.2) !important;
+            color: white !important;
+            border: none !important;
+        }
+        .active-3d-card:hover {
+            box-shadow: 
+                25px 25px 60px rgba(10, 25, 47, 0.4),
+                0 0 25px rgba(29, 111, 207, 0.3) !important;
+        }
+        .icon-elevated {
+            box-shadow: 
+                inset 2px 2px 5px rgba(255, 255, 255, 0.8),
+                4px 4px 10px rgba(29, 111, 207, 0.1);
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        .stagger-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 12px 12px 30px rgba(10, 25, 47, 0.3); }
+            50% { box-shadow: 12px 12px 35px rgba(29, 111, 207, 0.5); }
+            100% { box-shadow: 12px 12px 30px rgba(10, 25, 47, 0.3); }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="bg-background font-body text-on-surface min-h-screen selection:bg-primary selection:text-white dot-grid">
@@ -187,34 +258,57 @@
 </div>
 </div>
 </header>
-<!-- Quick Tiles (Glassified) -->
-<section class="py-20 relative z-10">
-<div class="max-w-[1440px] mx-auto px-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-<div class="group glass-card p-8 rounded-3xl flex flex-col items-center gap-4 transition-all hover:scale-105 cursor-pointer">
-<div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-primary text-3xl shadow-sm">🏕️</div>
-<span class="font-bold text-sm text-navy-dark uppercase tracking-widest">Plots</span>
-</div>
-<div class="group glass-card p-8 rounded-3xl flex flex-col items-center gap-4 transition-all hover:scale-105 cursor-pointer">
-<div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-primary text-3xl shadow-sm">🏢</div>
-<span class="font-bold text-sm text-navy-dark uppercase tracking-widest">Flats</span>
-</div>
-<div class="group glass-card p-8 rounded-3xl flex flex-col items-center gap-4 transition-all hover:scale-105 cursor-pointer">
-<div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-primary text-3xl shadow-sm">🏡</div>
-<span class="font-bold text-sm text-navy-dark uppercase tracking-widest">Villas</span>
-</div>
-<div class="group glass-card p-8 rounded-3xl flex flex-col items-center gap-4 transition-all hover:scale-105 cursor-pointer">
-<div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-primary text-3xl shadow-sm">🏪</div>
-<span class="font-bold text-sm text-navy-dark uppercase tracking-widest">Commercial</span>
-</div>
-<div class="group glass-card p-8 rounded-3xl flex flex-col items-center gap-4 transition-all hover:scale-105 cursor-pointer">
-<div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-primary text-3xl shadow-sm">🚗</div>
-<span class="font-bold text-sm text-navy-dark uppercase tracking-widest">Site Visit</span>
-</div>
-<div class="group bg-primary p-8 rounded-3xl flex flex-col items-center gap-4 transition-all hover:scale-105 cursor-pointer shadow-xl shadow-primary/20">
-<div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-white text-3xl">📋</div>
-<span class="font-bold text-sm text-white uppercase tracking-widest">Book Now</span>
-</div>
-</div>
+<!-- Quick Tiles (3D Redesign) -->
+<section class="py-24 relative z-10 overflow-hidden">
+    <div class="max-w-[1440px] mx-auto px-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10">
+        <!-- Plots -->
+        <div class="group depth-card p-10 rounded-[2.5rem] flex flex-col items-center gap-6 stagger-reveal cursor-pointer transition-all duration-500">
+            <div class="w-20 h-20 bg-white rounded-[1.5rem] flex items-center justify-center text-primary text-4xl icon-elevated animate-float shadow-sm group-hover:shadow-lg transition-all duration-500">
+                🏕️
+            </div>
+            <span class="font-bold text-[11px] text-navy-dark uppercase tracking-[0.2em] group-hover:text-primary transition-colors">Plots</span>
+        </div>
+
+        <!-- Flats -->
+        <div class="group depth-card p-10 rounded-[2.5rem] flex flex-col items-center gap-6 stagger-reveal cursor-pointer transition-all duration-500" style="animation-delay: 100ms;">
+            <div class="w-20 h-20 bg-white rounded-[1.5rem] flex items-center justify-center text-primary text-4xl icon-elevated animate-float shadow-sm group-hover:shadow-lg transition-all duration-500" style="animation-delay: 0.5s;">
+                🏢
+            </div>
+            <span class="font-bold text-[11px] text-navy-dark uppercase tracking-[0.2em] group-hover:text-primary transition-colors">Flats</span>
+        </div>
+
+        <!-- Villas -->
+        <div class="group depth-card p-10 rounded-[2.5rem] flex flex-col items-center gap-6 stagger-reveal cursor-pointer transition-all duration-500" style="animation-delay: 200ms;">
+            <div class="w-20 h-20 bg-white rounded-[1.5rem] flex items-center justify-center text-primary text-4xl icon-elevated animate-float shadow-sm group-hover:shadow-lg transition-all duration-500" style="animation-delay: 1s;">
+                🏡
+            </div>
+            <span class="font-bold text-[11px] text-navy-dark uppercase tracking-[0.2em] group-hover:text-primary transition-colors">Villas</span>
+        </div>
+
+        <!-- Commercial -->
+        <div class="group depth-card p-10 rounded-[2.5rem] flex flex-col items-center gap-6 stagger-reveal cursor-pointer transition-all duration-500" style="animation-delay: 300ms;">
+            <div class="w-20 h-20 bg-white rounded-[1.5rem] flex items-center justify-center text-primary text-4xl icon-elevated animate-float shadow-sm group-hover:shadow-lg transition-all duration-500" style="animation-delay: 1.5s;">
+                🏪
+            </div>
+            <span class="font-bold text-[11px] text-navy-dark uppercase tracking-[0.2em] group-hover:text-primary transition-colors">Commercial</span>
+        </div>
+
+        <!-- Site Visit -->
+        <div class="group depth-card p-10 rounded-[2.5rem] flex flex-col items-center gap-6 stagger-reveal cursor-pointer transition-all duration-500" style="animation-delay: 400ms;">
+            <div class="w-20 h-20 bg-white rounded-[1.5rem] flex items-center justify-center text-primary text-4xl icon-elevated animate-float shadow-sm group-hover:shadow-lg transition-all duration-500" style="animation-delay: 2s;">
+                🚗
+            </div>
+            <span class="font-bold text-[11px] text-navy-dark uppercase tracking-[0.2em] group-hover:text-primary transition-colors">Site Visit</span>
+        </div>
+
+        <!-- Book Now (Active/Pulse) -->
+        <div class="group depth-card active-3d-card p-10 rounded-[2.5rem] flex flex-col items-center gap-6 stagger-reveal cursor-pointer transition-all duration-500 animate-pulse-glow" style="animation-delay: 500ms;">
+            <div class="w-20 h-20 bg-white/20 rounded-[1.5rem] flex items-center justify-center text-white text-4xl icon-elevated animate-float shadow-inner" style="animation-delay: 2.5s;">
+                📋
+            </div>
+            <span class="font-bold text-[11px] text-white uppercase tracking-[0.2em]">Book Now</span>
+        </div>
+    </div>
 </section>
 <!-- Our Services (Glassified Grid) -->
 <section class="py-32 relative overflow-hidden" id="services">
@@ -675,10 +769,12 @@
                 });
             }, revealOptions);
 
-            document.querySelectorAll('.glass-card').forEach(card => {
-                // Apply initial state for animation
-                card.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700', 'ease-out');
-                revealObserver.observe(card);
+            document.querySelectorAll('.glass-card, .stagger-reveal').forEach(el => {
+                // Apply initial state for animation if not handled by CSS
+                if (el.classList.contains('glass-card')) {
+                    el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700', 'ease-out');
+                }
+                revealObserver.observe(el);
             });
         });
     </script>
