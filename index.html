@@ -854,7 +854,7 @@
 <script>
 (function () {
   const TOTAL   = 300;
-  const START   = 284;
+  const START   = 1;
   const FOLDER  = '3d%20files/';
   const PREFIX  = 'ezgif-frame-';
   const EXT     = '.jpg';
@@ -875,9 +875,10 @@
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  // Build frame filename
+  // Build frame filename with 3-digit padding
   function frameSrc(i) {
-    return `${FOLDER}${PREFIX}${START + i}${EXT}`;
+    const num = (START + i).toString().padStart(3, '0');
+    return `${FOLDER}${PREFIX}${num}${EXT}`;
   }
 
   // Preload all frames
