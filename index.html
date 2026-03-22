@@ -853,12 +853,11 @@
 
 <script>
 (function () {
-  // ── CONFIG ──────────────────────────────────────────
-  const TOTAL    = 300;
-  const START    = 284;          // first frame number
-  const FOLDER   = '3d files/';  // folder containing frames
-  const PREFIX   = 'ezgif-frame-';
-  const EXT      = '.jpg';
+  const TOTAL   = 300;
+  const START   = 284;
+  const FOLDER  = '3d%20files/';
+  const PREFIX  = 'ezgif-frame-';
+  const EXT     = '.jpg';
   // ────────────────────────────────────────────────────
 
   const canvas   = document.getElementById('bg-canvas');
@@ -890,11 +889,18 @@
       for (let i = 0; i < TOTAL; i++) {
         const img  = new Image();
         img.src    = frameSrc(i);
-        img.onload = img.onerror = () => {
+        img.onload = () => {
           loaded++;
           const pct = Math.round((loaded / TOTAL) * 100);
           barFill.style.width = pct + '%';
-          pctText.textContent = `Loading... ${pct}%`;
+          pctText.textContent = 'Loading... ' + pct + '%';
+          if (loaded === TOTAL) resolve();
+        };
+        img.onerror = () => {
+          loaded++;
+          const pct = Math.round((loaded / TOTAL) * 100);
+          barFill.style.width = pct + '%';
+          pctText.textContent = 'Loading... ' + pct + '%';
           if (loaded === TOTAL) resolve();
         };
         images[i] = img;
