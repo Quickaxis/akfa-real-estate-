@@ -162,22 +162,80 @@
         }
     </style>
 
-  <style>
-  #bg-canvas {
+  /* Preloader */
+  #preloader {
     position: fixed;
+    inset: 0;
+    background: #050514;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: opacity 0.6s ease;
+  }
+  #preloader .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: #fff;
+    letter-spacing: 4px;
+    margin-bottom: 28px;
+  }
+  #preloader .bar-track {
+    width: 260px;
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  #preloader .bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #1d4ed8, #60a5fa);
+    border-radius: 2px;
+    transition: width 0.1s ease;
+  }
+  #preloader .pct-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 14px;
+    letter-spacing: 1px;
+  }
+
+  /* Hero canvas background */
+  #hero-canvas {
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
     object-fit: cover;
   }
-  </style>
+
+  /* Make hero section a scroll container */
+  .hero-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 300vh;
+  }
+
+  /* All hero content stays above canvas */
+  .hero-section > *:not(#hero-canvas) {
+    position: relative;
+    z-index: 2;
+  }
 </head>
 <body class="bg-background font-body text-on-surface min-h-screen selection:bg-primary selection:text-white dot-grid">
 
-<!-- Background Canvas -->
-<canvas id="bg-canvas"></canvas>
+<div id="preloader">
+  <div class="brand">AKFA REAL ESTATE</div>
+  <div class="bar-track">
+    <div class="bar-fill" id="bar-fill"></div>
+  </div>
+  <div class="pct-text" id="pct-text">Loading... 0%</div>
+</div>
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
 <div class="flex justify-between items-center w-full px-8 py-5 max-w-[1440px] mx-auto">
@@ -206,7 +264,8 @@
 </div>
 </nav>
 <!-- Hero Section -->
-<header class="relative min-h-screen flex items-center pt-20 overflow-hidden hero-gradient" id="home">
+<header class="hero-section relative flex items-center pt-20 overflow-hidden hero-gradient" id="home">
+<canvas id="hero-canvas"></canvas>
 <div class="max-w-[1440px] mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 py-20">
 <div class="lg:col-span-7 flex flex-col justify-center">
 <h2 class="text-huge font-headline font-bold text-navy-dark mb-8">
@@ -796,31 +855,32 @@
 
 <script>
 (function () {
-  const TOTAL   = 300;
-  const START   = 1;
-  const FOLDER  = 'frames/';
-  const PREFIX  = 'ezgif-frame-';
-  const EXT     = '.jpg';
+  const TOTAL  = 300;
+  const FOLDER = 'frames/';
+  const PREFIX = 'ezgif-frame-';
+  const EXT    = '.png';
 
-  const canvas    = document.getElementById('bg-canvas');
+  const canvas    = document.getElementById('hero-canvas');
   const ctx       = canvas.getContext('2d');
   const preloader = document.getElementById('preloader');
   const barFill   = document.getElementById('bar-fill');
   const pctText   = document.getElementById('pct-text');
 
+  // Resize canvas to match hero section
   function resizeCanvas() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
     drawFrame(currentFrame);
   }
-  resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
+  // Build frame path with zero-padded number
   function frameSrc(i) {
-    const num = String(START + i).padStart(3, '0');
+    const num = String(i + 1).padStart(3, '0');
     return FOLDER + PREFIX + num + EXT;
   }
 
+  // Preload all frames
   const images = new Array(TOTAL);
   let loaded = 0;
   let currentFrame = 0;
@@ -849,6 +909,7 @@
     });
   }
 
+  // Draw frame cover-fit
   function drawFrame(idx) {
     idx = Math.max(0, Math.min(TOTAL - 1, idx));
     currentFrame = idx;
@@ -863,6 +924,7 @@
     ctx.drawImage(img, dx, dy, dw, dh);
   }
 
+  // Map scroll to frame
   let rafPending = false;
 
   function onScroll() {
@@ -870,20 +932,22 @@
     rafPending = true;
     requestAnimationFrame(() => {
       rafPending = false;
-      const scrollTop = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress  = maxScroll > 0 ? scrollTop / maxScroll : 0;
+      const hero = canvas.closest('section') || canvas.parentElement;
+      const heroRect = hero.getBoundingClientRect();
+      const heroH = hero.offsetHeight;
+      const scrolled = -heroRect.top;
+      const progress = Math.min(Math.max(scrolled / (heroH - window.innerHeight), 0), 1);
       drawFrame(Math.floor(progress * (TOTAL - 1)));
     });
   }
 
+  // Boot sequence
   preload().then(() => {
+    resizeCanvas();
+    preloader.style.opacity = '0';
+    setTimeout(() => { preloader.style.display = 'none'; }, 600);
     drawFrame(0);
     window.addEventListener('scroll', onScroll, { passive: true });
-    const needed = TOTAL * 6;
-    if (document.documentElement.scrollHeight < needed) {
-      document.body.style.minHeight = needed + 'px';
-    }
   });
 
 })();
