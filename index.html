@@ -125,6 +125,122 @@
     color: #ffffff !important;
   }
 
+  /* ── CEO SECTION FULL FIX ── */
+
+  #ceo {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  #ceo > div[style*="display: flex"],
+  #ceo > div[style*="display:flex"] {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 60px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 60px !important;
+  }
+
+  /* Photo column */
+  #ceo > div[style*="display: flex"] > div:first-child,
+  #ceo > div[style*="display:flex"] > div:first-child {
+    flex: 0 0 280px !important;
+    width: 280px !important;
+    max-width: 280px !important;
+  }
+
+  /* Content column */
+  #ceo > div[style*="display: flex"] > div:last-child,
+  #ceo > div[style*="display:flex"] > div:last-child {
+    flex: 1 !important;
+    min-width: 280px !important;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    #ceo {
+      padding: 60px 0 !important;
+    }
+
+    #ceo > div[style*="display: flex"],
+    #ceo > div[style*="display:flex"] {
+      flex-direction: column !important;
+      padding: 0 20px !important;
+      gap: 36px !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+
+    /* Photo full width centered on mobile */
+    #ceo > div[style*="display: flex"] > div:first-child,
+    #ceo > div[style*="display:flex"] > div:first-child {
+      flex: none !important;
+      width: 220px !important;
+      max-width: 220px !important;
+    }
+
+    /* Photo circle smaller on mobile */
+    #ceo > div[style*="display: flex"] > div:first-child > div:first-child,
+    #ceo > div[style*="display:flex"] > div:first-child > div:first-child {
+      width: 220px !important;
+      height: 220px !important;
+    }
+
+    /* Content full width on mobile */
+    #ceo > div[style*="display: flex"] > div:last-child,
+    #ceo > div[style*="display:flex"] > div:last-child {
+      flex: none !important;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+
+    /* Center align text on mobile */
+    #ceo h2 {
+      text-align: center !important;
+      font-size: 2.5rem !important;
+    }
+
+    #ceo p {
+      text-align: center !important;
+    }
+
+    /* Stats row centered on mobile */
+    #ceo div[style*="display: flex"][style*="gap: 36px"],
+    #ceo div[style*="display:flex"][style*="gap:36px"] {
+      justify-content: center !important;
+    }
+
+    /* Buttons centered on mobile */
+    #ceo div[style*="display:flex"][style*="gap:16px"],
+    #ceo div[style*="display: flex"][style*="gap: 16px"] {
+      justify-content: center !important;
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+
+    #ceo a {
+      width: 100% !important;
+      max-width: 280px !important;
+      justify-content: center !important;
+    }
+  }
+
+  /* ── SAME FIX FOR AKHTER HUSSAIN SECTION TOO ── */
+  @media (max-width: 768px) {
+    #about div[style*="display: flex"],
+    #about div[style*="display:flex"] {
+      flex-direction: column !important;
+      padding: 0 20px !important;
+      align-items: center !important;
+      gap: 36px !important;
+    }
+  }
+
   /* Animated gradient background */
   header::before {
     content: '';
