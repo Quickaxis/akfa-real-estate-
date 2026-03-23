@@ -363,6 +363,23 @@
   nav a:hover {
     color: #1d6fcf !important;
   }
+
+  /* FIX 2 — SERVICES CARDS NOT SHOWING */
+  .glass-card {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
+    transition: transform 0.4s ease, box-shadow 0.4s ease !important;
+  }
+  .glass-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 20px 50px rgba(29, 111, 207, 0.2) !important;
+  }
+  .stagger-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
         .material-symbols-outlined {
             font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
         }
@@ -479,23 +496,7 @@
         }
     </style>
 
-  <style>
-  #bg-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    object-fit: cover;
-  }
-  </style>
-</head>
-<body class="bg-background font-body text-on-surface min-h-screen selection:bg-primary selection:text-white dot-grid">
 
-<!-- Background Canvas -->
-<canvas id="bg-canvas"></canvas>
-<!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
 <div class="flex justify-between items-center w-full px-8 py-5 max-w-[1440px] mx-auto">
 <div class="flex items-center gap-4">
@@ -726,7 +727,7 @@
 <!-- Right Column: Bio and Info -->
 <div class="flex flex-col gap-8">
 <div>
-<span class="text-primary text-[12px] font-bold uppercase tracking-[0.2em] mb-4 block">Founder &amp; Owner</span>
+<span class="text-primary text-[12px] font-bold uppercase tracking-[0.2em] mb-4 block">Founder &amp; Director</span>
 <h3 class="text-5xl md:text-6xl font-headline font-bold text-navy-dark mb-2">Akhter <span class="italic text-primary">Hussain</span></h3>
 <p class="text-on-surface-variant font-medium text-sm flex items-center gap-2">
 <span class="material-symbols-outlined text-sm text-primary">location_on</span>
@@ -763,19 +764,16 @@
 <!-- CEO Section -->
 <section id="ceo" style="
   padding: 100px 0;
-  background: linear-gradient(135deg, #020d1f 0%, #0a1f3c 50%, #020d1f 100%);
+  background: linear-gradient(135deg, #f8faff 0%, #eef4ff 50%, #f8faff 100%);
   position: relative;
   overflow: hidden;
 ">
-  <!-- Background glow -->
   <div style="
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(29,111,207,0.12) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(29,111,207,0.06) 0%, transparent 70%);
     pointer-events: none;
   "></div>
 
@@ -790,60 +788,53 @@
     z-index: 2;
   ">
 
-    <!-- Photo side -->
+    <!-- Photo placeholder -->
     <div style="flex-shrink: 0; text-align: center;">
       <div style="
-        width: 280px;
-        height: 280px;
+        width: 280px; height: 280px;
         border-radius: 50%;
-        border: 3px solid rgba(29,111,207,0.5);
+        border: 3px solid rgba(29,111,207,0.3);
         padding: 6px;
-        background: rgba(29,111,207,0.1);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 0 60px rgba(29,111,207,0.2);
+        background: rgba(29,111,207,0.05);
+        box-shadow: 0 0 60px rgba(29,111,207,0.12);
         overflow: hidden;
         margin: 0 auto;
       ">
         <div style="
-          width: 100%;
-          height: 100%;
+          width: 100%; height: 100%;
           border-radius: 50%;
-          background: linear-gradient(135deg, #0a1f3c, #1d4ed8);
+          background: linear-gradient(135deg, #dbeafe, #bfdbfe, #93c5fd);
           display: flex;
           align-items: center;
           justify-content: center;
           font-family: 'Playfair Display', serif;
-          font-size: 5rem;
-          color: rgba(255,255,255,0.9);
+          font-size: 4rem;
+          color: #1d4ed8;
           font-weight: 700;
-          letter-spacing: -2px;
-        ">AH</div>
+        ">CEO</div>
       </div>
 
-      <!-- CEO badge -->
       <div style="
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        margin-top: 24px;
+        margin-top: 20px;
         padding: 8px 20px;
-        background: rgba(29,111,207,0.2);
-        border: 1px solid rgba(29,111,207,0.4);
+        background: rgba(29,111,207,0.1);
+        border: 1px solid rgba(29,111,207,0.25);
         border-radius: 50px;
-        backdrop-filter: blur(10px);
       ">
         <span style="
           width: 8px; height: 8px;
-          background: #60a5fa;
+          background: #22c55e;
           border-radius: 50%;
           display: inline-block;
-          animation: pulse-green 2s ease-in-out infinite;
         "></span>
-        <span style="color: #93c5fd; font-family: Inter, sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">Available</span>
+        <span style="color: #1d4ed8; font-family: Inter, sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">Available</span>
       </div>
     </div>
 
-    <!-- Content side -->
+    <!-- Content -->
     <div style="flex: 1;">
       <p style="
         font-family: Inter, sans-serif;
@@ -851,140 +842,82 @@
         font-weight: 700;
         letter-spacing: 3px;
         text-transform: uppercase;
-        color: #60a5fa;
+        color: #1d6fcf;
         margin-bottom: 12px;
-      ">CHIEF EXECUTIVE OFFICER</p>
+      ">FOUNDER & DIRECTOR</p>
 
       <h2 style="
         font-family: 'Playfair Display', serif;
-        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-size: clamp(2.2rem, 4vw, 3.5rem);
         font-weight: 700;
-        color: #ffffff;
+        color: #081b38;
         line-height: 1.1;
         margin-bottom: 8px;
-      ">Akhter <span style="
-        background: linear-gradient(135deg, #93c5fd, #60a5fa, #3b82f6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+      ">Our <span style="
+        color: #1d6fcf;
         font-style: italic;
-      ">Hussain</span></h2>
+      ">CEO</span></h2>
 
       <p style="
-        color: rgba(255,255,255,0.5);
+        color: #64748b;
         font-family: Inter, sans-serif;
         font-size: 0.9rem;
         margin-bottom: 28px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
       ">
-        <span style="color: #60a5fa;">&#9679;</span>
-        AKFA Real Estate · Dibrugarh, Assam
+        &#9679; AKFA Real Estate · Dibrugarh, Assam
       </p>
 
       <p style="
-        color: rgba(255,255,255,0.7);
+        color: #475569;
         font-family: Inter, sans-serif;
         font-size: 1rem;
         line-height: 1.8;
-        margin-bottom: 16px;
-        max-width: 560px;
-      ">
-        As the CEO and driving force behind AKFA Real Estate, Akhter Hussain 
-        has spent over 6 years transforming how families in Dibrugarh experience 
-        property ownership. His leadership is built on a simple promise — 
-        every transaction must be transparent, legal, and stress-free.
-      </p>
-
-      <p style="
-        color: rgba(255,255,255,0.55);
-        font-family: Inter, sans-serif;
-        font-size: 0.95rem;
-        line-height: 1.8;
         margin-bottom: 36px;
-        max-width: 560px;
-        font-style: italic;
-        border-left: 3px solid rgba(29,111,207,0.5);
-        padding-left: 20px;
+        max-width: 540px;
+        padding: 20px 24px;
+        background: rgba(29,111,207,0.05);
+        border-left: 4px solid #1d6fcf;
+        border-radius: 0 12px 12px 0;
       ">
-        "My goal is simple — every family that works with AKFA should feel 
-        completely confident in their property decision."
+        Leading AKFA Real Estate with a vision for inclusive and 
+        transparent property solutions for every family in Dibrugarh. 
+        Dedicated to building trust, one property at a time.
       </p>
 
-      <!-- Stats row -->
+      <!-- Stats -->
       <div style="display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 36px;">
         <div>
-          <p style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:#fff; margin:0;">6+</p>
-          <p style="font-family:Inter,sans-serif; font-size:0.78rem; color:rgba(255,255,255,0.5); margin:4px 0 0; letter-spacing:1px; text-transform:uppercase;">Years Experience</p>
+          <p style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:#081b38; margin:0;">6+</p>
+          <p style="font-family:Inter,sans-serif; font-size:0.75rem; color:#64748b; margin:4px 0 0; letter-spacing:1px; text-transform:uppercase;">Years in Industry</p>
         </div>
-        <div style="width:1px; background:rgba(255,255,255,0.1);"></div>
+        <div style="width:1px; background:#e2e8f0;"></div>
         <div>
-          <p style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:#fff; margin:0;">100+</p>
-          <p style="font-family:Inter,sans-serif; font-size:0.78rem; color:rgba(255,255,255,0.5); margin:4px 0 0; letter-spacing:1px; text-transform:uppercase;">Properties Closed</p>
+          <p style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:#081b38; margin:0;">500+</p>
+          <p style="font-family:Inter,sans-serif; font-size:0.75rem; color:#64748b; margin:4px 0 0; letter-spacing:1px; text-transform:uppercase;">Families Served</p>
         </div>
-        <div style="width:1px; background:rgba(255,255,255,0.1);"></div>
+        <div style="width:1px; background:#e2e8f0;"></div>
         <div>
-          <p style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:#fff; margin:0;">500+</p>
-          <p style="font-family:Inter,sans-serif; font-size:0.78rem; color:rgba(255,255,255,0.5); margin:4px 0 0; letter-spacing:1px; text-transform:uppercase;">Families Served</p>
+          <p style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:#081b38; margin:0;">100%</p>
+          <p style="font-family:Inter,sans-serif; font-size:0.75rem; color:#64748b; margin:4px 0 0; letter-spacing:1px; text-transform:uppercase;">Client Trust</p>
         </div>
       </div>
 
-      <!-- CTA buttons -->
-      <div style="display:flex; gap:16px; flex-wrap:wrap;">
-        <a href="https://wa.me/919365566831" target="_blank" style="
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 14px 28px;
-          background: linear-gradient(135deg, #1d6fcf, #2563eb);
-          color: #ffffff;
-          font-family: Inter, sans-serif;
-          font-weight: 600;
-          font-size: 0.9rem;
-          border-radius: 14px;
-          text-decoration: none;
-          box-shadow: 0 4px 20px rgba(29,111,207,0.4);
-          transition: all 0.3s;
-        ">WhatsApp Akhter</a>
-
-        <a href="tel:9365566831" style="
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 14px 28px;
-          background: rgba(255,255,255,0.07);
-          color: #ffffff;
-          font-family: Inter, sans-serif;
-          font-weight: 600;
-          font-size: 0.9rem;
-          border-radius: 14px;
-          text-decoration: none;
-          border: 1px solid rgba(255,255,255,0.15);
-          backdrop-filter: blur(10px);
-          transition: all 0.3s;
-        ">Call Directly</a>
-      </div>
+      <a href="https://wa.me/919365566831" target="_blank" style="
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        background: linear-gradient(135deg, #1d6fcf, #2563eb);
+        color: #fff;
+        font-family: Inter, sans-serif;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-radius: 14px;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(29,111,207,0.3);
+      ">WhatsApp Us</a>
     </div>
   </div>
-
-  <!-- Mobile responsive for CEO section -->
-  <style>
-    @media (max-width: 768px) {
-      #ceo > div:last-child {
-        flex-direction: column !important;
-        gap: 40px !important;
-        padding: 0 20px !important;
-      }
-      #ceo > div:last-child > div:first-child {
-        width: 100% !important;
-      }
-      #ceo > div:last-child > div:first-child > div:first-child {
-        width: 200px !important;
-        height: 200px !important;
-      }
-    }
-  </style>
 </section>
 <!-- Featured Properties (Glassified Cards) -->
 <section class="py-32 max-w-[1440px] mx-auto px-8" id="properties">
@@ -1336,100 +1269,5 @@
             });
         });
     </script>
-
-<script>
-(function () {
-  const TOTAL   = 300;
-  const START   = 1;
-  const FOLDER  = 'frames/';
-  const PREFIX  = 'ezgif-frame-';
-  const EXT     = '.jpg';
-
-  const canvas    = document.getElementById('bg-canvas');
-  const ctx       = canvas.getContext('2d');
-  const preloader = document.getElementById('preloader');
-  const barFill   = document.getElementById('bar-fill');
-  const pctText   = document.getElementById('pct-text');
-
-  function resizeCanvas() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-    drawFrame(currentFrame);
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  function frameSrc(i) {
-    const num = String(START + i).padStart(3, '0');
-    return FOLDER + PREFIX + num + EXT;
-  }
-
-  const images = new Array(TOTAL);
-  let loaded = 0;
-  let currentFrame = 0;
-
-  function preload() {
-    return new Promise((resolve) => {
-      for (let i = 0; i < TOTAL; i++) {
-        const img = new Image();
-        img.onload = () => {
-          loaded++;
-          const pct = Math.round((loaded / TOTAL) * 100);
-          barFill.style.width = pct + '%';
-          pctText.textContent = 'Loading... ' + pct + '%';
-          if (loaded === TOTAL) resolve();
-        };
-        img.onerror = () => {
-          loaded++;
-          const pct = Math.round((loaded / TOTAL) * 100);
-          barFill.style.width = pct + '%';
-          pctText.textContent = 'Loading... ' + pct + '%';
-          if (loaded === TOTAL) resolve();
-        };
-        img.src = frameSrc(i);
-        images[i] = img;
-      }
-    });
-  }
-
-  function drawFrame(idx) {
-    idx = Math.max(0, Math.min(TOTAL - 1, idx));
-    currentFrame = idx;
-    const img = images[idx];
-    if (!img || !img.complete || !img.naturalWidth) return;
-    const cw = canvas.width, ch = canvas.height;
-    const iw = img.naturalWidth, ih = img.naturalHeight;
-    const scale = Math.max(cw / iw, ch / ih);
-    const dw = iw * scale, dh = ih * scale;
-    const dx = (cw - dw) / 2, dy = (ch - dh) / 2;
-    ctx.clearRect(0, 0, cw, ch);
-    ctx.drawImage(img, dx, dy, dw, dh);
-  }
-
-  let rafPending = false;
-
-  function onScroll() {
-    if (rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(() => {
-      rafPending = false;
-      const scrollTop = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress  = maxScroll > 0 ? scrollTop / maxScroll : 0;
-      drawFrame(Math.floor(progress * (TOTAL - 1)));
-    });
-  }
-
-  preload().then(() => {
-    drawFrame(0);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    const needed = TOTAL * 6;
-    if (document.documentElement.scrollHeight < needed) {
-      document.body.style.minHeight = needed + 'px';
-    }
-  });
-
-})();
-</script>
 
 </body></html>
