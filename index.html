@@ -204,7 +204,23 @@
     letter-spacing: 1px;
   }
 
-  /* ── PROBLEM 1: Canvas behind hero content ──────────────── */
+  /* ── FIX 1: Target the actual hero header element ────────── */
+  header#home {
+    position: relative !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-height: 300vh !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding-top: 70px !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    border: none !important;
+    gap: 0 !important;
+    column-gap: 0 !important;
+  }
+
+  /* Canvas fills full header */
   #hero-canvas {
     position: absolute !important;
     top: 0 !important;
@@ -213,75 +229,78 @@
     height: 100% !important;
     z-index: 0 !important;
     display: block !important;
-    object-fit: cover;
   }
 
-  /* Dark gradient overlay so text is readable on video */
-  .hero-section::after,
+  /* Dark overlay over video for text readability */
   header#home::after {
     content: '' !important;
     position: absolute !important;
     inset: 0 !important;
     background: linear-gradient(
-      to right,
-      rgba(0, 0, 10, 0.65) 0%,
-      rgba(0, 0, 10, 0.3) 60%,
-      rgba(0, 0, 10, 0.1) 100%
+      135deg,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.35) 50%,
+      rgba(0, 0, 0, 0.15) 100%
     ) !important;
     z-index: 1 !important;
     pointer-events: none !important;
   }
 
-  /* All hero children ABOVE canvas and overlay */
-  .hero-section > *:not(#hero-canvas),
+  /* Remove any stray ::before dividers */
+  header#home::before {
+    display: none !important;
+  }
+
+  /* All header children above canvas and overlay */
   header#home > *:not(#hero-canvas) {
     position: relative !important;
     z-index: 2 !important;
   }
 
-  /* Fix hero text color for dark video background */
-  .hero-section h1, .hero-section h2, .hero-section h3,
+  /* White text on dark video background */
   header#home h1, header#home h2, header#home h3 {
     color: #ffffff !important;
     text-shadow: 0 2px 12px rgba(0,0,0,0.4);
   }
-  .hero-section p, header#home p {
+  header#home p {
     color: rgba(255, 255, 255, 0.85) !important;
   }
-  .hero-section span, header#home span {
-    color: inherit;
-  }
 
-  /* Hero stat/glass cards — glassmorphism on dark bg */
-  .hero-section .glass-card,
-  header#home .glass-card,
-  .hero-section [class*="stat"],
-  .hero-section [class*="card"],
+  /* Glassmorphism stat cards inside hero */
+  header#home [class*="stat"],
+  header#home [class*="glass"],
   header#home [class*="card"] {
     background: rgba(255, 255, 255, 0.12) !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
     color: #ffffff !important;
   }
 
-  /* ── PROBLEM 2: Hero layout / vertical grid lines ────────── */
-  .hero-section,
-  header#home {
+  /* FIX 4 — Remove vertical panel lines from inner grid */
+  header#home > div {
     position: relative !important;
-    overflow: hidden !important;
-    min-height: 300vh !important;
-    display: block !important;
+    z-index: 2 !important;
     border: none !important;
-    column-gap: 0 !important;
-    gap: 0 !important;
+    outline: none !important;
   }
-  .hero-section::before,
-  header#home::before {
+  header#home > div::before,
+  header#home > div::after {
     display: none !important;
   }
 
-  /* ── PROBLEM 3: Missing service / property cards ──────────── */
+  /* Mobile specific */
+  @media (max-width: 768px) {
+    header#home {
+      padding: 80px 16px 32px 16px !important;
+    }
+    header#home h1, header#home h2 {
+      font-size: clamp(2rem, 9vw, 3rem) !important;
+      line-height: 1.1 !important;
+    }
+  }
+
+  /* ── Cards outside hero (services / properties) ──────────── */
   .glass-card,
   [class*="service-card"],
   [class*="property-card"],
@@ -293,7 +312,7 @@
     transform: translateY(0) !important;
   }
 
-  /* ── PROBLEM 4: Navbar glassmorphism ─────────────────────── */
+  /* ── Navbar glassmorphism ─────────────────────────────────── */
   nav.glass-nav,
   nav[class*="glass"] {
     background: rgba(255, 255, 255, 0.85) !important;
@@ -948,9 +967,9 @@
   const pctText   = document.getElementById('pct-text');
 
   function resizeCanvas() {
-    canvas.width  = canvas.offsetWidth  || window.innerWidth;
-    canvas.height = canvas.offsetHeight || window.innerHeight;
-    drawFrame(currentFrame);
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    if (typeof currentFrame !== 'undefined') drawFrame(currentFrame);
   }
   window.addEventListener('resize', resizeCanvas);
 
@@ -1025,11 +1044,16 @@
     rafPending = true;
     requestAnimationFrame(() => {
       rafPending = false;
-      const hero = canvas.closest('section') || canvas.parentElement;
-      const rect = hero.getBoundingClientRect();
-      const heroH = hero.offsetHeight;
-      const scrolled = -rect.top;
-      const progress = Math.min(Math.max(scrolled / (heroH - window.innerHeight), 0), 1);
+      const hero = canvas.closest('header')
+                || canvas.closest('section')
+                || canvas.parentElement;
+      const rect      = hero.getBoundingClientRect();
+      const heroH     = hero.offsetHeight;
+      const scrolled  = -rect.top;
+      const maxScroll = heroH - window.innerHeight;
+      const progress  = maxScroll > 0
+        ? Math.min(Math.max(scrolled / maxScroll, 0), 1)
+        : 0;
       drawFrame(Math.floor(progress * (TOTAL - 1)));
     });
   }
