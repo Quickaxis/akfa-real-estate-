@@ -46,6 +46,175 @@
       }
     </script>
 <style>
+  /* FORCE ALL CONTENT VISIBLE — override broken scroll animation */
+  .opacity-0 {
+    opacity: 1 !important;
+  }
+  .translate-y-10 {
+    transform: translateY(0) !important;
+  }
+  .glass-card,
+  .stagger-reveal {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: box-shadow 0.3s ease, transform 0.3s ease !important;
+  }
+  .glass-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12) !important;
+  }
+
+  /* FIX 2 — HERO BACKGROUND: DARK LUXURY GRADIENT */
+  header {
+    background: 
+      linear-gradient(135deg, 
+        #0a0f1e 0%, 
+        #0d1f3c 35%, 
+        #0f2d5c 65%, 
+        #091428 100%
+      ) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    min-height: 100vh !important;
+  }
+
+  /* Animated subtle glow orbs in background */
+  header::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -20% !important;
+    right: -10% !important;
+    width: 600px !important;
+    height: 600px !important;
+    background: radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%) !important;
+    border-radius: 50% !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    animation: pulse-glow 6s ease-in-out infinite alternate !important;
+  }
+
+  header::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -10% !important;
+    left: -5% !important;
+    width: 400px !important;
+    height: 400px !important;
+    background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%) !important;
+    border-radius: 50% !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    animation: pulse-glow 8s ease-in-out infinite alternate-reverse !important;
+  }
+
+  @keyframes pulse-glow {
+    0%   { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 1;   transform: scale(1.15); }
+  }
+
+  /* All hero content above the glow effects */
+  header > * {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  /* Hero text white on dark background */
+  header h1 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3) !important;
+  }
+  header p {
+    color: rgba(255,255,255,0.75) !important;
+  }
+
+  /* Stat cards: glassmorphism on dark */
+  header [class*="rounded"] {
+    background: rgba(255,255,255,0.08) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #ffffff !important;
+  }
+  header [class*="rounded"] h2,
+  header [class*="rounded"] h3,
+  header [class*="rounded"] p,
+  header [class*="rounded"] span {
+    color: #ffffff !important;
+  }
+
+  /* Book Visit CTA card */
+  header [class*="bg-white"],
+  header [class*="bg-slate"] {
+    background: rgba(255,255,255,0.1) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    color: #ffffff !important;
+  }
+
+  /* FIX 3 — SECTION BACKGROUNDS */
+  body {
+    background: #f8fafc !important;
+  }
+
+  #services {
+    background: linear-gradient(180deg, #f0f7ff 0%, #e8f2ff 100%) !important;
+    padding: 80px 0 !important;
+  }
+
+  #properties {
+    background: #ffffff !important;
+    padding: 80px 0 !important;
+  }
+
+  #about {
+    background: linear-gradient(135deg, #0a0f1e 0%, #0d1f3c 100%) !important;
+    padding: 80px 0 !important;
+  }
+  #about h1, #about h2, #about h3, #about p, 
+  #about span, #about div {
+    color: #ffffff !important;
+  }
+
+  #contact {
+    background: linear-gradient(180deg, #f8fafc 0%, #eef3ff 100%) !important;
+    padding: 80px 0 !important;
+  }
+
+  /* FIX 4 — ELEVATE CARD STYLING */
+  .glass-card {
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07), 
+                0 1px 4px rgba(0,0,0,0.05) !important;
+    border: 1px solid rgba(226,232,240,0.8) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  }
+  .glass-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 20px 48px rgba(0,0,0,0.13) !important;
+  }
+
+  /* FIX 5 — NAVBAR REFINEMENT */
+  nav {
+    background: rgba(255,255,255,0.92) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.07) !important;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06) !important;
+  }
+
+  /* FIX 6 — FOOTER DARK THEME */
+  footer {
+    background: #060e1f !important;
+    color: rgba(255,255,255,0.7) !important;
+    border-top: none !important;
+  }
+  footer * {
+    color: rgba(255,255,255,0.7) !important;
+  }
+  footer h2, footer h3 {
+    color: #ffffff !important;
+  }
         .material-symbols-outlined {
             font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
         }
@@ -785,10 +954,6 @@
             }, revealOptions);
 
             document.querySelectorAll('.glass-card, .stagger-reveal').forEach(el => {
-                // Apply initial state for animation if not handled by CSS
-                if (el.classList.contains('glass-card')) {
-                    el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700', 'ease-out');
-                }
                 revealObserver.observe(el);
             });
         });
