@@ -146,6 +146,57 @@
     gap: 60px !important;
   }
 
+  /* FIX 3 — CONTACT FORM IMPROVEMENTS */
+  #contact form label {
+    display: block !important;
+    color: #0a1f3c !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    margin-bottom: 6px !important;
+    text-transform: none !important;
+  }
+
+  #contact form input, #contact form textarea {
+    background: #ffffff !important;
+    border: 1.5px solid #c0c8d8 !important;
+    border-radius: 10px !important;
+    padding: 14px 18px !important;
+    font-size: 15px !important;
+    color: #0a1f3c !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: all 0.3s ease !important;
+    font-family: Inter, sans-serif !important;
+  }
+
+  #contact form input::placeholder, #contact form textarea::placeholder {
+    color: #7a8aaa !important;
+    opacity: 1 !important;
+  }
+
+  #contact form input:focus, #contact form textarea:focus {
+    border-color: #1a56db !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(26,86,219,0.15) !important;
+  }
+
+  #contact form button {
+    background: #1a56db !important;
+    color: #ffffff !important;
+    border-radius: 50px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    text-transform: none !important;
+  }
+
+  #contact form button:hover {
+    background: #1643a3 !important;
+    transform: translateY(-2px) !important;
+  }
+
   /* Photo column */
   #ceo > div[style*="display: flex"] > div:first-child,
   #ceo > div[style*="display:flex"] > div:first-child {
@@ -1271,82 +1322,106 @@
           ">Real experiences from our valued clients</p>
         </div>
 
-        <!-- 3-Column Grid -->
+        <!-- 4-Card Grid (2x2 Desktop, 1 Column Mobile) -->
         <div class="testimonials-grid" style="
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 32px;
         ">
           <!-- Card 1 -->
-          <div style="background: white; border-radius: 20px; padding: 40px 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; border: 1px solid rgba(0,0,0,0.05);">
+          <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;">
             <div style="
-              width: 80px;
-              height: 80px;
+              width: 90px;
+              height: 90px;
               border-radius: 50%;
-              border: 2px dashed #cbd5e1;
-              margin: 0 auto 24px;
+              border: 2px dashed #ccc;
+              margin: 0 auto 20px;
               display: flex;
               flex-direction: column;
               align-items: center;
               justify-content: center;
               color: #94a3b8;
-              background: #f8fafc;
+              background: #f0f0f0;
             ">
-              <span class="material-symbols-outlined" style="font-size: 24px;">photo_camera</span>
-              <span style="font-size: 10px; font-weight: 700;">PHOTO</span>
+              <span style="font-size: 24px;">📷</span>
+              <span style="font-size: 10px; font-weight: 600; color: #777; margin-top: 4px;">Add Photo</span>
             </div>
-            <div style="color: #c9a84c; margin-bottom: 20px; font-size: 18px;">★★★★★</div>
-            <p style="font-family: Inter, sans-serif; font-style: italic; color: #64748b; margin-bottom: 24px; line-height: 1.7;">"Your testimonial will appear here. This is a placeholder for your client's positive experience with AKFA Real Estate."</p>
+            <div style="color: #c9a84c; margin: 10px 0; font-size: 20px;">★★★★★</div>
+            <p style="font-family: Inter, sans-serif; font-style: italic; color: #64748b; margin-bottom: 24px; line-height: 1.7;">"Your client testimonial will appear here. This is a placeholder for your client's positive experience with AKFA Real Estate."</p>
             <h5 style="font-family: 'Playfair Display', serif; color: #020d1f; font-weight: 700; font-size: 1.2rem; margin: 0;">— Client Name</h5>
-            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Dibrugarh, Assam</p>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">Dibrugarh, Assam</p>
           </div>
 
           <!-- Card 2 -->
-          <div style="background: white; border-radius: 20px; padding: 40px 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; border: 1px solid rgba(0,0,0,0.05);">
+          <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;">
             <div style="
-              width: 80px;
-              height: 80px;
+              width: 90px;
+              height: 90px;
               border-radius: 50%;
-              border: 2px dashed #cbd5e1;
-              margin: 0 auto 24px;
+              border: 2px dashed #ccc;
+              margin: 0 auto 20px;
               display: flex;
               flex-direction: column;
               align-items: center;
               justify-content: center;
               color: #94a3b8;
-              background: #f8fafc;
+              background: #f0f0f0;
             ">
-              <span class="material-symbols-outlined" style="font-size: 24px;">photo_camera</span>
-              <span style="font-size: 10px; font-weight: 700;">PHOTO</span>
+              <span style="font-size: 24px;">📷</span>
+              <span style="font-size: 10px; font-weight: 600; color: #777; margin-top: 4px;">Add Photo</span>
             </div>
-            <div style="color: #c9a84c; margin-bottom: 20px; font-size: 18px;">★★★★★</div>
-            <p style="font-family: Inter, sans-serif; font-style: italic; color: #64748b; margin-bottom: 24px; line-height: 1.7;">"Your testimonial will appear here. This is a placeholder for your client's positive experience with AKFA Real Estate."</p>
+            <div style="color: #c9a84c; margin: 10px 0; font-size: 20px;">★★★★★</div>
+            <p style="font-family: Inter, sans-serif; font-style: italic; color: #64748b; margin-bottom: 24px; line-height: 1.7;">"Your client testimonial will appear here. This is a placeholder for your client's positive experience with AKFA Real Estate."</p>
             <h5 style="font-family: 'Playfair Display', serif; color: #020d1f; font-weight: 700; font-size: 1.2rem; margin: 0;">— Client Name</h5>
-            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Dibrugarh, Assam</p>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">Dibrugarh, Assam</p>
           </div>
 
           <!-- Card 3 -->
-          <div style="background: white; border-radius: 20px; padding: 40px 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; border: 1px solid rgba(0,0,0,0.05);">
+          <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;">
             <div style="
-              width: 80px;
-              height: 80px;
+              width: 90px;
+              height: 90px;
               border-radius: 50%;
-              border: 2px dashed #cbd5e1;
-              margin: 0 auto 24px;
+              border: 2px dashed #ccc;
+              margin: 0 auto 20px;
               display: flex;
               flex-direction: column;
               align-items: center;
               justify-content: center;
               color: #94a3b8;
-              background: #f8fafc;
+              background: #f0f0f0;
             ">
-              <span class="material-symbols-outlined" style="font-size: 24px;">photo_camera</span>
-              <span style="font-size: 10px; font-weight: 700;">PHOTO</span>
+              <span style="font-size: 24px;">📷</span>
+              <span style="font-size: 10px; font-weight: 600; color: #777; margin-top: 4px;">Add Photo</span>
             </div>
-            <div style="color: #c9a84c; margin-bottom: 20px; font-size: 18px;">★★★★★</div>
-            <p style="font-family: Inter, sans-serif; font-style: italic; color: #64748b; margin-bottom: 24px; line-height: 1.7;">"Your testimonial will appear here. This is a placeholder for your client's positive experience with AKFA Real Estate."</p>
+            <div style="color: #c9a84c; margin: 10px 0; font-size: 20px;">★★★★★</div>
+            <p style="font-family: Inter, sans-serif; font-style: italic; color: #64748b; margin-bottom: 24px; line-height: 1.7;">"Your client testimonial will appear here. This is a placeholder for your client's positive experience with AKFA Real Estate."</p>
             <h5 style="font-family: 'Playfair Display', serif; color: #020d1f; font-weight: 700; font-size: 1.2rem; margin: 0;">— Client Name</h5>
-            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Dibrugarh, Assam</p>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">Dibrugarh, Assam</p>
+          </div>
+
+          <!-- Card 4 -->
+          <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;">
+            <div style="
+              width: 90px;
+              height: 90px;
+              border-radius: 50%;
+              border: 2px dashed #ccc;
+              margin: 0 auto 20px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              color: #94a3b8;
+              background: #f0f0f0;
+            ">
+              <span style="font-size: 24px;">📷</span>
+              <span style="font-size: 10px; font-weight: 600; color: #777; margin-top: 4px;">Add Photo</span>
+            </div>
+            <div style="color: #c9a84c; margin: 10px 0; font-size: 20px;">★★★★★</div>
+            <p style="font-family: Inter, sans-serif; font-style: italic; color: #64748b; margin-bottom: 24px; line-height: 1.7;">"Your client testimonial will appear here. This is a placeholder for your client's positive experience with AKFA Real Estate."</p>
+            <h5 style="font-family: 'Playfair Display', serif; color: #020d1f; font-weight: 700; font-size: 1.2rem; margin: 0;">— Client Name</h5>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">Dibrugarh, Assam</p>
           </div>
         </div>
       </div>
@@ -1367,9 +1442,9 @@
 </span>
 </button>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[1000px] mx-auto justify-center">
 <!-- Property Card 1 -->
-<div class="group relative rounded-[2rem] overflow-hidden glass-card transition-all hover:scale-[1.02]">
+<div class="group relative rounded-[2rem] overflow-hidden glass-card transition-all hover:scale-[1.02] max-w-[480px]">
 <div class="h-[400px] overflow-hidden relative m-4 rounded-[1.5rem]">
 <img alt="Khanikar 1 Bigha" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="gallery/khanikar%201%20bigha.jpg"/>
 <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/80 via-transparent to-transparent"></div>
@@ -1392,7 +1467,7 @@
 </div>
 </div>
 <!-- Property Card 2 -->
-<div class="group relative rounded-[2rem] overflow-hidden glass-card transition-all hover:scale-[1.02]">
+<div class="group relative rounded-[2rem] overflow-hidden glass-card transition-all hover:scale-[1.02] max-w-[480px]">
 <div class="h-[400px] overflow-hidden relative m-4 rounded-[1.5rem]">
 <img alt="Thakurthan 2 bigha sold out" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="gallery/thakurthan%202%20bigha%20sold%20out.jpg"/>
 <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/80 via-transparent to-transparent"></div>
@@ -1414,30 +1489,9 @@
                     </button>
 </div>
 </div>
-<!-- Property Card 3 -->
-<div class="group relative rounded-[2rem] overflow-hidden glass-card transition-all hover:scale-[1.02]">
-<div class="h-[400px] overflow-hidden relative m-4 rounded-[1.5rem]">
-<img alt="Commercial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfO7RFQfXiEVHzw5ZhiebkhB-N93cXDK7ucKlejnxMQy5hFDE81wY-Xrs1iCMtvEuf61WET08u4m39bEFybwCr1tmhHg_CR-vH6UBOBcmgQzpHxWCocBP3R7bQ2eaIweLbM1igdbWGYgEH8M5hz71NtjXgp8rtF_ZFMICesS5NsupcZL8Mfw_vYqyJXzoySS1QA5DjoRJjs4x0yT5dDJfu0XksZlyBnvroFWB9qDw3nL5bLJKQYc0sgp0r4MNVQvTbPIj56BzDtiOt"/>
-<div class="absolute inset-0 bg-gradient-to-t from-navy-dark/80 via-transparent to-transparent"></div>
-<div class="absolute bottom-6 left-6 right-6">
-<span class="bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-2 inline-block">Commercial</span>
-<h4 class="text-2xl font-headline font-bold text-white">Market Center Complex</h4>
 </div>
 </div>
-<div class="p-8 pt-2">
-<div class="flex justify-between items-center mb-6">
-<div class="flex items-center gap-2 text-primary font-bold">
-<span class="material-symbols-outlined text-sm">location_on</span>
-                            Barbaruah
-                        </div>
-<span class="text-2xl font-bold text-navy-dark">₹1.20Cr</span>
-</div>
-<button class="w-full border-2 border-primary text-primary font-bold py-4 rounded-xl group-hover:bg-primary group-hover:text-white transition-all">
-                        Property Details
-                    </button>
-</div>
-</div>
-</div>
+</section>
     <!-- Smart Investment Benefits Section -->
     <section class="py-32 relative bg-navy-dark overflow-hidden border-t border-white/5">
         <div class="mb-20 text-center max-w-[1440px] mx-auto px-8">
@@ -1520,22 +1574,25 @@
 </div>
 </div>
 <div class="flex flex-col justify-center">
-<div class="glass-card p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl">
+<div class="glass-card p-10 rounded-[2.5rem] bg-white border border-white/10 shadow-2xl">
 <form class="space-y-6">
 <div class="space-y-2">
-<input class="w-full bg-white/5 border-b-2 border-primary/20 border-t-0 border-x-0 py-6 px-4 text-white placeholder:text-white/30 focus:ring-0 focus:border-primary transition-colors text-lg" placeholder="Your Name" type="text"/>
+<label for="name">FULL NAME</label>
+<input id="name" placeholder="Your Name" type="text"/>
 </div>
 <div class="space-y-2">
-<input class="w-full bg-white/5 border-b-2 border-primary/20 border-t-0 border-x-0 py-6 px-4 text-white placeholder:text-white/30 focus:ring-0 focus:border-primary transition-colors text-lg" placeholder="Phone Number" type="tel"/>
+<label for="phone">PHONE NUMBER</label>
+<input id="phone" placeholder="Phone Number" type="tel"/>
 </div>
 <div class="space-y-2">
-<textarea class="w-full bg-white/5 border-b-2 border-primary/20 border-t-0 border-x-0 py-6 px-4 text-white placeholder:text-white/30 focus:ring-0 focus:border-primary transition-colors text-lg" placeholder="How can we help?" rows="4"></textarea>
+<label for="message">MESSAGE</label>
+<textarea id="message" placeholder="How can we help?" rows="4"></textarea>
 </div>
 <div class="pt-8">
-<button class="w-full bg-primary py-6 rounded-full text-white font-bold text-lg hover:bg-navy-dark transition-all duration-300 shadow-xl shadow-primary/20">
+<button type="submit">
                                 Send Inquiry
-                            </button>
-<p class="text-on-surface-variant text-xs mt-6 text-center">By sending, you agree to our processing of your personal data.</p>
+</button>
+<p class="text-on-surface-variant text-xs mt-6 text-center" style="color: #64748b !important;">By sending, you agree to our processing of your personal data.</p>
 </div>
 </form>
 </div>
