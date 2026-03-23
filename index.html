@@ -66,154 +66,241 @@
 
   /* FIX 2 — HERO BACKGROUND: DARK LUXURY GRADIENT */
   header {
-    background: 
-      linear-gradient(135deg, 
-        #0a0f1e 0%, 
-        #0d1f3c 35%, 
-        #0f2d5c 65%, 
-        #091428 100%
-      ) !important;
-    position: relative !important;
-    overflow: hidden !important;
-    min-height: 100vh !important;
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background: #020d1f;
   }
 
-  /* Animated subtle glow orbs in background */
+  /* Animated gradient background */
   header::before {
-    content: '' !important;
-    position: absolute !important;
-    top: -20% !important;
-    right: -10% !important;
-    width: 600px !important;
-    height: 600px !important;
-    background: radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%) !important;
-    border-radius: 50% !important;
-    z-index: 0 !important;
-    pointer-events: none !important;
-    animation: pulse-glow 6s ease-in-out infinite alternate !important;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 20% 40%, rgba(29,111,207,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(15,45,92,0.6) 0%, transparent 50%),
+      radial-gradient(ellipse 100% 100% at 50% 100%, rgba(2,13,31,1) 0%, transparent 70%),
+      linear-gradient(135deg, #020d1f 0%, #0a1f3c 40%, #0d2a52 70%, #020d1f 100%);
+    z-index: 0;
   }
 
+  /* Glowing orb top-right */
   header::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: -10% !important;
-    left: -5% !important;
-    width: 400px !important;
-    height: 400px !important;
-    background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%) !important;
-    border-radius: 50% !important;
-    z-index: 0 !important;
-    pointer-events: none !important;
-    animation: pulse-glow 8s ease-in-out infinite alternate-reverse !important;
+    content: '';
+    position: absolute;
+    top: -150px;
+    right: -150px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(29,111,207,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    animation: orbFloat 8s ease-in-out infinite;
   }
 
-  @keyframes pulse-glow {
-    0%   { opacity: 0.6; transform: scale(1); }
-    100% { opacity: 1;   transform: scale(1.15); }
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-30px, 20px) scale(1.05); }
+    66% { transform: translate(20px, -30px) scale(0.95); }
   }
 
-  /* All hero content above the glow effects */
-  header > * {
-    position: relative !important;
-    z-index: 2 !important;
+  /* Animated floating particles */
+  .hero-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .hero-particles span {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(29,111,207,0.6);
+    border-radius: 50%;
+    animation: particleFloat linear infinite;
+  }
+  .hero-particles span:nth-child(1)  { left: 10%; animation-duration: 12s; animation-delay: 0s;   width: 3px; height: 3px; }
+  .hero-particles span:nth-child(2)  { left: 25%; animation-duration: 18s; animation-delay: 2s; }
+  .hero-particles span:nth-child(3)  { left: 40%; animation-duration: 15s; animation-delay: 4s;   width: 3px; height: 3px; }
+  .hero-particles span:nth-child(4)  { left: 55%; animation-duration: 20s; animation-delay: 1s; }
+  .hero-particles span:nth-child(5)  { left: 70%; animation-duration: 14s; animation-delay: 3s;   width: 4px; height: 4px; }
+  .hero-particles span:nth-child(6)  { left: 85%; animation-duration: 16s; animation-delay: 5s; }
+  .hero-particles span:nth-child(7)  { left: 15%; animation-duration: 22s; animation-delay: 7s; }
+  .hero-particles span:nth-child(8)  { left: 60%; animation-duration: 19s; animation-delay: 6s;   width: 3px; height: 3px; }
+  .hero-particles span:nth-child(9)  { left: 90%; animation-duration: 13s; animation-delay: 2s; }
+  .hero-particles span:nth-child(10) { left: 35%; animation-duration: 17s; animation-delay: 8s; }
+
+  @keyframes particleFloat {
+    0%   { bottom: -10px; opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { bottom: 110%; opacity: 0; }
   }
 
-  /* Hero text white on dark background */
+  /* Hero content sits above bg */
+  header > *:not(.hero-particles) {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── HERO TEXT ── */
   header h1 {
-    color: #ffffff !important;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.3) !important;
-  }
-  header p {
-    color: rgba(255,255,255,0.75) !important;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    color: #ffffff;
+    letter-spacing: -0.02em;
   }
 
-  /* Stat cards: glassmorphism on dark */
-  header [class*="rounded"] {
-    background: rgba(255,255,255,0.08) !important;
+  header h1 .highlight {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-style: italic;
+  }
+
+  header p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 480px;
+  }
+
+  /* ── STAT CARDS ── */
+  .stat-card, [class*="stat-card"] {
+    background: rgba(255,255,255,0.06) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(255,255,255,0.15) !important;
-    color: #ffffff !important;
-  }
-  header [class*="rounded"] h2,
-  header [class*="rounded"] h3,
-  header [class*="rounded"] p,
-  header [class*="rounded"] span {
-    color: #ffffff !important;
-  }
-
-  /* Book Visit CTA card */
-  header [class*="bg-white"],
-  header [class*="bg-slate"] {
-    background: rgba(255,255,255,0.1) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(255,255,255,0.2) !important;
-    color: #ffffff !important;
-  }
-
-  /* FIX 3 — SECTION BACKGROUNDS */
-  body {
-    background: #f8fafc !important;
-  }
-
-  #services {
-    background: linear-gradient(180deg, #f0f7ff 0%, #e8f2ff 100%) !important;
-    padding: 80px 0 !important;
-  }
-
-  #properties {
-    background: #ffffff !important;
-    padding: 80px 0 !important;
-  }
-
-  #about {
-    background: linear-gradient(135deg, #0a0f1e 0%, #0d1f3c 100%) !important;
-    padding: 80px 0 !important;
-  }
-  #about h1, #about h2, #about h3, #about p, 
-  #about span, #about div {
-    color: #ffffff !important;
-  }
-
-  #contact {
-    background: linear-gradient(180deg, #f8fafc 0%, #eef3ff 100%) !important;
-    padding: 80px 0 !important;
-  }
-
-  /* FIX 4 — ELEVATE CARD STYLING */
-  .glass-card {
-    background: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
     border-radius: 20px !important;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.07), 
-                0 1px 4px rgba(0,0,0,0.05) !important;
-    border: 1px solid rgba(226,232,240,0.8) !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    padding: 24px 20px !important;
+    transition: all 0.3s ease !important;
+  }
+  .stat-card:hover {
+    background: rgba(29,111,207,0.15) !important;
+    border-color: rgba(29,111,207,0.4) !important;
+    transform: translateY(-4px) !important;
+  }
+
+  /* ── BOOK VISIT CARD ── */
+  .book-card, [class*="book-card"], .cta-card {
+    background: rgba(29,111,207,0.12) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid rgba(29,111,207,0.3) !important;
+    border-radius: 24px !important;
+  }
+
+  /* ── NAVBAR ── */
+  nav, .glass-nav {
+    background: rgba(2, 13, 31, 0.8) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  }
+
+  nav a, .glass-nav a {
+    color: rgba(255,255,255,0.8) !important;
+    transition: color 0.2s !important;
+  }
+  nav a:hover {
+    color: #60a5fa !important;
+  }
+
+  /* Book Visit button */
+  nav button, .glass-nav button {
+    background: linear-gradient(135deg, #1d6fcf, #2563eb) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 10px 22px !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+    box-shadow: 0 4px 20px rgba(29,111,207,0.4) !important;
+  }
+  nav button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 30px rgba(29,111,207,0.5) !important;
+  }
+
+  /* Services section */
+  #services {
+    background: linear-gradient(180deg, #f0f6ff 0%, #ffffff 100%);
+  }
+
+  /* Glass cards throughout site */
+  .glass-card {
+    background: rgba(255,255,255,0.9) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(29,111,207,0.12) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 24px rgba(29,111,207,0.08) !important;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
   .glass-card:hover {
     transform: translateY(-6px) !important;
-    box-shadow: 0 20px 48px rgba(0,0,0,0.13) !important;
+    box-shadow: 0 16px 48px rgba(29,111,207,0.18) !important;
+    border-color: rgba(29,111,207,0.3) !important;
   }
 
-  /* FIX 5 — NAVBAR REFINEMENT */
-  nav {
-    background: rgba(255,255,255,0.92) !important;
-    backdrop-filter: blur(24px) !important;
-    -webkit-backdrop-filter: blur(24px) !important;
-    border-bottom: 1px solid rgba(0,0,0,0.07) !important;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.06) !important;
+  /* Section headings */
+  section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #081b38;
+    letter-spacing: -0.02em;
   }
 
-  /* FIX 6 — FOOTER DARK THEME */
-  footer {
-    background: #060e1f !important;
-    color: rgba(255,255,255,0.7) !important;
-    border-top: none !important;
+  /* About/Founder section */
+  #about {
+    background: linear-gradient(135deg, #020d1f 0%, #0a1f3c 60%, #020d1f 100%);
   }
-  footer * {
-    color: rgba(255,255,255,0.7) !important;
-  }
-  footer h2, footer h3 {
-    color: #ffffff !important;
+
+  @media (max-width: 768px) {
+    header {
+      min-height: 100svh;
+      padding: 90px 20px 50px;
+      align-items: flex-start;
+    }
+
+    header h1 {
+      font-size: clamp(2.2rem, 10vw, 3rem);
+    }
+
+    header p {
+      font-size: 0.95rem;
+    }
+
+    /* Stack hero layout on mobile */
+    header > div {
+      flex-direction: column !important;
+      gap: 32px !important;
+    }
+
+    /* Stat cards full width on mobile */
+    .stat-card {
+      width: 100% !important;
+    }
+
+    /* Section padding on mobile */
+    section {
+      padding: 60px 20px !important;
+    }
+    
+    section h2 {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
   }
         .material-symbols-outlined {
             font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
@@ -376,11 +463,15 @@
 </nav>
 <!-- Hero Section -->
 <header class="relative min-h-screen flex items-center pt-20 overflow-hidden hero-gradient" id="home">
+<div class="hero-particles">
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
 <div class="max-w-[1440px] mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 py-20">
 <div class="lg:col-span-7 flex flex-col justify-center">
-<h2 class="text-huge font-headline font-bold text-navy-dark mb-8">
-                    Building the <br/><span class="text-primary italic">Dream</span> for <br/>Every Client.
-                </h2>
+<h1 class="text-huge font-headline font-bold text-navy-dark mb-8">
+                    Building the <br/><span class="text-primary italic highlight">Dream</span> for <br/>Every Client.
+                </h1>
 <p class="text-xl text-on-surface-variant mb-12 max-w-xl leading-relaxed">
                     Dibrugarh's premier real estate consultancy. We specialize in verified plots, modern flats, and seamless legal assistance.
                 </p>
