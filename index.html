@@ -163,7 +163,7 @@
     </style>
 
   <style>
-  /* Preloader */
+  /* ── Preloader ─────────────────────────────────────────── */
   #preloader {
     position: fixed;
     inset: 0;
@@ -204,15 +204,7 @@
     letter-spacing: 1px;
   }
 
-  /* Hero section must be relative and tall enough to scroll */
-  .hero-section,
-  header#home {
-    position: relative !important;
-    overflow: hidden !important;
-    min-height: 300vh !important;
-  }
-
-  /* Canvas fills the entire hero section */
+  /* ── PROBLEM 1: Canvas behind hero content ──────────────── */
   #hero-canvas {
     position: absolute !important;
     top: 0 !important;
@@ -224,11 +216,77 @@
     object-fit: cover;
   }
 
-  /* All hero content stays above canvas */
+  /* Dark gradient overlay so text is readable on video */
+  .hero-section::after,
+  header#home::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 10, 0.65) 0%,
+      rgba(0, 0, 10, 0.3) 60%,
+      rgba(0, 0, 10, 0.1) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* All hero children ABOVE canvas and overlay */
   .hero-section > *:not(#hero-canvas),
   header#home > *:not(#hero-canvas) {
     position: relative !important;
     z-index: 2 !important;
+  }
+
+  /* Fix hero text color for dark video background */
+  .hero-section h2,
+  header#home h2 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .hero-section p,
+  header#home p {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  /* ── PROBLEM 2: Hero layout / vertical grid lines ────────── */
+  .hero-section,
+  header#home {
+    position: relative !important;
+    overflow: hidden !important;
+    min-height: 300vh !important;
+    display: block !important;
+    border: none !important;
+    column-gap: 0 !important;
+  }
+
+  /* Remove any stray ::before dividers */
+  .hero-section::before {
+    display: none !important;
+  }
+
+  /* ── PROBLEM 3: Missing service / property cards ──────────── */
+  .glass-card,
+  [class*="card"],
+  .services-grid > *,
+  .properties-grid > * {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  /* ── PROBLEM 4: Navbar glassmorphism ─────────────────────── */
+  nav.glass-nav {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
   }
   </style>
 </head>
