@@ -47,6 +47,25 @@
     </script>
 <style>
 
+  * {
+    text-transform: none !important;
+  }
+
+  /* But keep these specifically uppercase (labels only) */
+  .uppercase-label,
+  .badge-label,
+  [style*="letter-spacing: 3px"],
+  [style*="letter-spacing: 4px"],
+  [style*="letter-spacing: 2.5px"],
+  [style*="letter-spacing: 2px"],
+  [style*="tracking-widest"],
+  [style*="tracking-[0.3em]"],
+  [style*="tracking-[0.4em]"],
+  .tracking-widest,
+  .tracking-tighter {
+    text-transform: uppercase !important;
+  }
+
   body {
     background: #020d1f;
     color: rgba(255, 255, 255, 0.9);
@@ -54,16 +73,20 @@
   }
 
   h1, h2, h3, h4, h5, h6, .font-headline {
-    font-family: 'Bebas Neue', 'Oswald', sans-serif !important;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 700 !important;
   }
 
-  .glass-card {
-    background: rgba(255, 255, 255, 0.03) !important;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: white !important;
+  nav a {
+    text-transform: none !important;
+    font-family: Inter, sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    color: rgba(255,255,255,0.85) !important;
+  }
+
+  nav a:hover {
+    color: #60a5fa !important;
   }
 
 
@@ -77,6 +100,29 @@
     display: flex;
     align-items: center;
     background: #020d1f;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(3rem, 6vw, 5.5rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.08 !important;
+    color: #ffffff !important;
+    text-transform: none !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  section h2, section h3 {
+    text-transform: none !important;
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 700 !important;
+    color: #081b38 !important;
+  }
+
+  /* For dark sections (about, properties, etc.) */
+  #about h2, #about h3, #ceo.bg-navy-dark h2, #ceo.bg-navy-dark h3, 
+  #properties h2, #properties h3, #contact h2, #contact h3 {
+    color: #ffffff !important;
   }
 
   /* Animated gradient background */
@@ -543,16 +589,16 @@
 <img src="gallery/akfalogo.jpg" alt="AKFA Logo" class="w-full h-full object-contain" />
 </div>
 <div>
-<h1 class="text-xl font-bold font-headline text-white leading-none tracking-tight uppercase">AKFA REAL ESTATE</h1>
+<h1 class="text-xl font-bold font-headline text-white leading-none tracking-tight uppercase-label">AKFA REAL ESTATE</h1>
 <p class="text-[9px] uppercase tracking-[0.3em] text-primary font-black">Dibrugarh · Assam</p>
 </div>
 </div>
 <div class="hidden lg:flex items-center gap-10">
-<a class="text-sm font-bold text-primary uppercase tracking-widest" href="#home">Home</a>
-<a class="text-sm font-bold text-white/70 hover:text-primary transition-colors uppercase tracking-widest" href="#properties">Properties</a>
-<a class="text-sm font-bold text-white/70 hover:text-primary transition-colors uppercase tracking-widest" href="#services">Services</a>
-<a class="text-sm font-bold text-white/70 hover:text-primary transition-colors uppercase tracking-widest" href="#about">About</a>
-<a class="text-sm font-bold text-white/70 hover:text-primary transition-colors uppercase tracking-widest" href="#contact">Contact</a>
+<a href="#home">Home</a>
+<a href="#properties">Properties</a>
+<a href="#services">Services</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
 </div>
 <div class="flex items-center gap-6">
 
@@ -570,8 +616,8 @@
 </div>
 <div class="max-w-[1440px] mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 py-20">
 <div class="lg:col-span-7 flex flex-col justify-center">
-<h1 class="text-huge font-headline font-bold text-navy-dark mb-8">
-                    Building the <br/><span class="text-primary italic highlight">Dream</span> for <br/>Every Client.
+<h1 class="text-huge font-headline font-bold text-white mb-8">
+                    Building the <em class="text-primary italic highlight">Dream</em> for Every Client.
                 </h1>
 <p class="text-xl text-on-surface-variant mb-12 max-w-xl leading-relaxed">
                     Dibrugarh's premier real estate consultancy. We specialize in verified plots, modern flats, and seamless legal assistance.
@@ -686,12 +732,12 @@
         </div>
     </div>
 </section>
-<!-- Our Services (Glassified Grid) -->
-<section class="py-32 relative bg-navy-dark overflow-hidden" id="services">
+<!-- Our Services (Light Theme) -->
+<section id="services" class="py-32 bg-slate-50 relative overflow-hidden">
 <div class="max-w-[1440px] mx-auto px-8 relative z-10">
 <div class="mb-20 text-center">
-<h3 class="text-6xl font-headline font-bold text-white mb-6">Our Services</h3>
-<p class="text-white/60 text-lg max-w-2xl mx-auto italic">Complete real estate ecosystem designed for Dibrugarh's growing landscape.</p>
+<h2 style="color: #081b38 !important; opacity: 1 !important; font-family: 'Playfair Display', serif !important; font-size: clamp(2rem, 4vw, 3rem) !important; font-weight: 700 !important; margin-bottom: 16px;">Our Services</h2>
+<p class="max-w-2xl mx-auto" style="color: #475569 !important; opacity: 1 !important; font-size: 1.1rem; font-style: italic !important;">Complete real estate ecosystem designed for Dibrugarh's growing landscape.</p>
 </div>
 <div style="
   display: grid;
@@ -805,7 +851,7 @@
 <div class="flex flex-col gap-8">
 <div>
 <span class="text-primary text-[12px] font-bold uppercase tracking-[0.2em] mb-4 block">Founder &amp; Director</span>
-<h3 class="text-6xl md:text-8xl font-headline font-bold text-white mb-2 uppercase leading-none">Akhter <span class="italic text-primary">Hussain</span></h3>
+<h2 class="text-6xl md:text-8xl font-headline font-bold text-white mb-2 uppercase-label leading-none">Akhter <span class="italic text-primary">Hussain</span></h2>
 <p class="text-white/60 font-medium text-sm flex items-center gap-2">
 <span class="material-symbols-outlined text-sm text-primary">location_on</span>
                             AKFA Real Estate · Dibrugarh, Assam
@@ -842,194 +888,50 @@
 <section id="ceo" style="
   padding: 100px 0;
   background: linear-gradient(135deg, #f0f6ff 0%, #e8f0fe 40%, #f0f6ff 100%);
-  position: relative;
-  overflow: hidden;
+  width: 100%;
+  display: block;
 ">
-  <!-- Decorative circle -->
   <div style="
-    position: absolute;
-    top: -100px; right: -100px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(29,111,207,0.08) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  "></div>
-  <div style="
-    position: absolute;
-    bottom: -80px; left: -80px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(29,111,207,0.06) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  "></div>
-
-  <div style="
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
     display: flex;
     align-items: center;
     gap: 80px;
-    position: relative;
-    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px;
+    width: 100%;
+    box-sizing: border-box;
   ">
-
-    <!-- Photo -->
-    <div style="flex-shrink: 0; text-align: center;">
-      <div style="
-        width: 300px; height: 300px;
-        border-radius: 50%;
-        padding: 6px;
-        background: linear-gradient(135deg, #1d6fcf, #60a5fa, #1d4ed8);
-        box-shadow: 0 20px 60px rgba(29,111,207,0.25);
-        margin: 0 auto;
-        overflow: hidden;
-      ">
-        <img alt="Forida Begum" class="w-full h-full object-cover" src="gallery/ceo.jpeg"/>
-      </div>
-
-      <!-- Badge -->
-      <div style="
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        margin-top: 24px;
-        padding: 10px 22px;
-        background: linear-gradient(135deg, #1d6fcf, #2563eb);
-        border-radius: 50px;
-        box-shadow: 0 4px 16px rgba(29,111,207,0.3);
-      ">
-        <span style="
-          width: 8px; height: 8px;
-          background: #ffffff;
-          border-radius: 50%;
-          display: inline-block;
-        "></span>
-        <span style="
-          color: #ffffff;
-          font-family: Inter, sans-serif;
-          font-size: 0.78rem;
-          font-weight: 700;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-        ">Marketing Lead</span>
+    <!-- Left: Photo -->
+    <div style="flex: 0 0 300px; width: 300px;">
+      <div style="position: relative; width: 300px; height: 300px; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(8,27,56,0.1);">
+        <img src="gallery/ceo.jpeg" alt="Forida Begum" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
     </div>
 
-    <!-- Content -->
-    <div style="flex: 1;">
-
-      <!-- Label -->
-      <p style="
-        font-family: Inter, sans-serif;
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        color: #1d6fcf;
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      ">
-        <span style="display:inline-block;width:32px;height:2px;background:#1d6fcf;border-radius:2px;"></span>
-        CEO OF MARKETING & LEAD HEAD
+    <!-- Right: Content -->
+    <div style="flex: 1; min-width: 0;">
+      <span class="text-primary text-[11px] font-bold uppercase tracking-[0.3em] mb-4 block badge-label">CEO of Marketing & Lead Head</span>
+      <h2 style="font-size: 3.5rem; color: #081b38; margin-bottom: 16px; line-height: 1.1; font-family: 'Playfair Display', serif;">Forida <span class="italic text-primary" style="font-family: 'Playfair Display', serif;">Begum</span></h2>
+      
+      <p style="color: #1d6fcf; font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 8px;">
+        <span class="material-symbols-outlined text-sm">verified_user</span>
+        AKFA Real Estate · Dibrugarh, Assam
       </p>
 
-      <!-- Name -->
-      <h2 style="
-        font-family: 'Playfair Display', serif;
-        font-size: clamp(2.5rem, 5vw, 4rem);
-        font-weight: 700;
-        color: #081b38;
-        line-height: 1.1;
-        margin-bottom: 8px;
-      ">Forida <span style="
-        color: #1d6fcf;
-        font-style: italic;
-      ">Begum</span></h2>
+      <p style="color: #475569; font-size: 1.05rem; line-height: 1.8; margin-bottom: 24px;">
+        Forida Begum leads the marketing and client acquisition strategy at AKFA Real Estate, bringing creativity, energy, and a deep understanding of the Dibrugarh property market. As CEO of Marketing and Lead Head, she is the driving force behind every client relationship and outreach initiative.
+      </p>
 
-      <!-- Location -->
-      <p style="
-        color: #64748b;
-        font-family: Inter, sans-serif;
-        font-size: 0.88rem;
-        margin-bottom: 28px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      ">
-        <span style="color: #1d6fcf; font-size: 1rem;">&#9679;</span>
-<section class="py-32 relative bg-navy-dark overflow-hidden" id="ceo">
-  <div class="max-w-[1440px] mx-auto px-8 relative z-10">
-    <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-      <!-- Left: CEO Photo -->
-      <div class="relative flex-shrink-0">
-        <div class="relative w-72 h-72 md:w-96 md:h-96">
-          <div class="absolute inset-0 rounded-3xl border-2 border-primary/30 rotate-3 transition-transform group-hover:rotate-0"></div>
-          <div class="absolute inset-0 rounded-3xl bg-white/5 backdrop-blur-sm -rotate-3 transition-transform group-hover:rotate-0"></div>
-          <div class="relative h-full w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-            <img src="gallery/ceo.jpeg" alt="Forida Begum" class="w-full h-full object-cover">
-          </div>
-        </div>
-      </div>
+      <blockquote style="border-left: 4px solid #1d6fcf; padding-left: 20px; font-style: italic; color: #334155; margin-bottom: 32px;">
+        "Our mission is to make property ownership accessible, transparent, and stress-free for every family in Dibrugarh."
+      </blockquote>
 
-      <!-- Right: Content -->
-      <div class="flex-1">
-        <span class="text-primary text-[11px] font-bold uppercase tracking-[0.3em] mb-4 block">CEO of Marketing & Lead Head</span>
-        <h3 class="text-6xl md:text-8xl font-headline font-bold text-white mb-4 leading-none uppercase">Forida <span class="italic text-primary">Begum</span></h3>
-        
-        <p class="text-white/60 font-medium text-sm flex items-center gap-2 mb-8">
-          <span class="material-symbols-outlined text-sm text-primary">verified_user</span>
-          Strategic Marketing · Client Acquisition
-        </p>
-
-        <p class="text-white/80 font-light text-xl leading-relaxed mb-8 max-w-2xl">
-          Forida Begum leads the marketing and client acquisition strategy at AKFA Real Estate, bringing creativity, energy, and a deep understanding of the Dibrugarh property market. As CEO of Marketing and Lead Head, she is the driving force behind every client relationship and outreach initiative.
-        </p>
-
-        <blockquote class="border-l-4 border-primary pl-8 py-2 mb-10 bg-white/5 rounded-r-2xl">
-          <p class="text-2xl font-headline italic text-white/90 leading-relaxed">"Our mission is to make property ownership accessible, transparent, and stress-free for every family in Dibrugarh."</p>
-        </blockquote>
-
-        <div class="flex flex-wrap gap-12 mb-12 bg-white/5 p-8 rounded-3xl border border-white/10">
-          <div>
-            <p class="text-4xl font-headline font-bold text-white leading-none">500+</p>
-            <p class="text-[10px] uppercase font-bold text-primary tracking-widest mt-2">Leads Generated</p>
-          </div>
-          <div class="w-px bg-white/10"></div>
-          <div>
-            <p class="text-4xl font-headline font-bold text-white leading-none">100%</p>
-            <p class="text-[10px] uppercase font-bold text-primary tracking-widest mt-2">Satisfaction</p>
-          </div>
-          <div class="w-px bg-white/10"></div>
-          <div>
-            <p class="text-4xl font-headline font-bold text-white leading-none">6+</p>
-            <p class="text-[10px] uppercase font-bold text-primary tracking-widest mt-2">Years Experience</p>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap gap-4">
-          <a href="https://wa.me/919365566831" class="bg-primary text-white px-10 py-5 rounded-2xl font-bold hover:bg-white hover:text-primary transition-all shadow-lg shadow-primary/20">WhatsApp Forida</a>
-          <a href="tel:9395582635" class="border-2 border-white/20 text-white px-10 py-5 rounded-2xl font-bold hover:bg-white/5 transition-all">Call: 93955 82635</a>
-        </div>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="https://wa.me/919365566831" style="background: #1d6fcf; color: white; padding: 14px 28px; border-radius: 14px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 20px rgba(29, 111, 207, 0.2);" class="badge-label">WhatsApp Forida</a>
+        <a href="tel:9395582635" style="border: 2px solid rgba(29, 111, 207, 0.2); color: #1d6fcf; padding: 14px 28px; border-radius: 14px; font-weight: 700; text-decoration: none;" class="badge-label">Call: 93955 82635</a>
       </div>
     </div>
   </div>
-  <!-- Mobile responsive -->
-  <style>
-    @media (max-width: 768px) {
-      #ceo > div:nth-child(3) {
-        flex-direction: column !important;
-        gap: 40px !important;
-        padding: 0 20px !important;
-      }
-      #ceo > div:nth-child(3) > div:first-child > div:first-child {
-        width: 220px !important;
-        height: 220px !important;
-      }
-    }
-  </style>
 </section>
 <!-- Featured Properties (Glassified Cards) -->
 <section class="py-32 bg-navy-dark px-8" id="properties">
@@ -1175,7 +1077,7 @@
 <section class="py-32 relative overflow-hidden bg-navy-dark" id="contact">
 <div class="max-w-[1440px] mx-auto px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-24">
 <div>
-<h3 class="text-7xl font-headline font-bold text-white mb-12 leading-none uppercase">Let's discuss <br/>your next move.</h3>
+<h3 class="text-7xl font-headline font-bold text-white mb-12 leading-none uppercase-label">Let's discuss <br/>your next move.</h3>
 <p class="text-white/60 text-lg mb-16 leading-relaxed max-w-md font-light">Our team of experts is ready to help you navigate the Dibrugarh real estate market with transparency and speed.</p>
 <div class="space-y-10">
 <div class="flex items-center gap-6 group">
@@ -1229,15 +1131,15 @@
 <div class="w-10 h-10 flex items-center justify-center rounded-xl overflow-hidden bg-white/5">
 <img src="gallery/akfalogo.jpg" alt="AKFA Logo" class="w-full h-full object-contain" />
 </div>
-<h5 class="text-2xl font-headline font-bold text-white tracking-tight uppercase">AKFA REAL ESTATE</h5>
+<h5 class="text-2xl font-headline font-bold text-white tracking-tight uppercase-label">AKFA REAL ESTATE</h5>
 </div>
-<div class="flex gap-12 text-sm font-bold text-white/70 uppercase tracking-widest">
+<div class="flex gap-12 text-sm font-bold text-white/70 tracking-widest">
 <a class="hover:text-primary transition-colors" href="#about">About</a>
 <a class="hover:text-primary transition-colors" href="#properties">Properties</a>
 <a class="hover:text-primary transition-colors" href="#services">Services</a>
 <a class="hover:text-primary transition-colors" href="#contact">Contact</a>
 </div>
-<div class="text-[10px] uppercase tracking-[0.3em] font-bold text-white/30">
+<div class="text-[10px] tracking-[0.3em] font-bold text-white/30 badge-label">
                     © 2025 AKFA Dibrugarh
                 </div>
 </div>
@@ -1265,7 +1167,7 @@
 
                 <!-- Header -->
                 <div class="text-center mb-10">
-                    <h3 class="text-4xl font-headline font-bold text-white mb-3 uppercase">Book Your Site Visit</h3>
+                    <h3 class="text-4xl font-headline font-bold text-white mb-3">Book Your Site Visit</h3>
                     <p class="text-white/60 text-sm font-light uppercase tracking-widest">Choose how you'd like to reach us.</p>
                 </div>
 
