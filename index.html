@@ -554,13 +554,49 @@
     border-color: rgba(29,111,207,0.3) !important;
   }
 
-  /* Section headings */
-  section h2 {
+  /* ── SECTION HEADINGS VISIBILITY ── */
+  section h2, section h3, .bg-navy-dark h2, .bg-navy-dark h3, .bg-navy-dark h4, .bg-navy-dark h5 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
-    color: #081b38;
-    letter-spacing: -0.02em;
+    opacity: 1 !important;
+    text-transform: none !important;
+  }
+
+  /* Headings on Dark Backgrounds (#020d1f, #0a1f3c, etc) */
+  .bg-navy-dark h2, .bg-navy-dark h3, .bg-navy-dark h4, .bg-navy-dark h5,
+  #properties h3, #ceo h2, #about h2, #office h2 {
+    color: #ffffff !important;
+  }
+
+  /* Headings on Light Backgrounds (#f0f4f8, #ffffff, etc) */
+  #testimonials h2, #contact h2, #services h2, #contact h3, #services h3 {
+    color: #0a1f3c !important;
+  }
+
+  /* FIX 1: "Our Office" Specific Styles */
+  #office h2 {
+    color: #c9a84c !important; /* Gold */
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4) !important;
+    font-size: 42px !important;
+  }
+
+  /* FIX 2: "Smart Investment Benefits" & Cards Fixes */
+  section.bg-navy-dark h3 {
+    color: #ffffff !important;
+  }
+  
+  /* Fix cards inside dark sections that might have dark text */
+  .bg-navy-dark .glass-card h5 {
+    color: #ffffff !important;
+  }
+  .bg-navy-dark .glass-card p {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  @media (max-width: 768px) {
+    #office h2 {
+      font-size: 28px !important;
+    }
   }
 
   /* About/Founder section */
