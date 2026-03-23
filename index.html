@@ -221,9 +221,9 @@
       height: 280px !important;
     }
 
-    .testimonials-grid {
+    .testimonials-grid, .client-photos-grid {
       grid-template-columns: 1fr !important;
-      gap: 24px !important;
+      gap: 16px !important;
     }
 
     #ceo > div[style*="display: flex"],
@@ -1295,15 +1295,14 @@
       </div>
     </section>
 
-    <!-- SECTION 2: CLIENT TESTIMONIALS -->
     <section id="testimonials" style="
       padding: 100px 0;
       background: #f0f4f8;
       width: 100%;
       text-transform: none !important;
     ">
-      <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px;">
-        <div style="text-align: center; margin-bottom: 60px;">
+      <div style="max-width: 900px; margin: 0 auto; padding: 0 40px; text-align: center;">
+        <div style="margin-bottom: 60px;">
           <h2 style="
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
@@ -1322,108 +1321,84 @@
           ">Real experiences from our valued clients</p>
         </div>
 
-        <!-- 4-Card Grid (2x2 Desktop, 1 Column Mobile) -->
-        <div class="testimonials-grid" style="
+        <!-- 4-Photo Grid (2x2 Desktop, 1 Column Mobile) -->
+        <div class="client-photos-grid" style="
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 32px;
+          grid-template-rows: repeat(2, 1fr);
+          gap: 20px;
         ">
-          <!-- Card 1 -->
-          <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;">
-            <div style="
-              width: 90px;
-              height: 90px;
-              border-radius: 50%;
-              border: 2px dashed #ccc;
-              margin: 0 auto 20px;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              color: #94a3b8;
-              background: #f0f0f0;
-            ">
-              <span style="font-size: 24px;">📷</span>
-              <span style="font-size: 10px; font-weight: 600; color: #777; margin-top: 4px;">Add Photo</span>
-            </div>
-            <div style="color: #c9a84c; margin: 10px 0; font-size: 20px;">★★★★★</div>
-            <p style="font-family: Inter, sans-serif; font-style: italic; color: #64748b; margin-bottom: 24px; line-height: 1.7;">"Your client testimonial will appear here. This is a placeholder for your client's positive experience with AKFA Real Estate."</p>
-            <h5 style="font-family: 'Playfair Display', serif; color: #020d1f; font-weight: 700; font-size: 1.2rem; margin: 0;">— Client Name</h5>
-            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">Dibrugarh, Assam</p>
+          <!-- Slot 1 -->
+          <div id="client-photo-1" style="
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #dde3ec;
+            border-radius: 12px;
+            border: 2px dashed #aab4c8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          ">
+            <span style="font-size: 24px; color: #8896a8;">📷</span>
+            <span style="font-size: 14px; font-weight: 500; color: #8896a8; margin-top: 8px;">Add Photo</span>
           </div>
 
-          <!-- Card 2 -->
-          <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;">
-            <div style="
-              width: 90px;
-              height: 90px;
-              border-radius: 50%;
-              border: 2px dashed #ccc;
-              margin: 0 auto 20px;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              color: #94a3b8;
-              background: #f0f0f0;
-            ">
-              <span style="font-size: 24px;">📷</span>
-              <span style="font-size: 10px; font-weight: 600; color: #777; margin-top: 4px;">Add Photo</span>
-            </div>
-            <div style="color: #c9a84c; margin: 10px 0; font-size: 20px;">★★★★★</div>
-            <p style="font-family: Inter, sans-serif; font-style: italic; color: #64748b; margin-bottom: 24px; line-height: 1.7;">"Your client testimonial will appear here. This is a placeholder for your client's positive experience with AKFA Real Estate."</p>
-            <h5 style="font-family: 'Playfair Display', serif; color: #020d1f; font-weight: 700; font-size: 1.2rem; margin: 0;">— Client Name</h5>
-            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">Dibrugarh, Assam</p>
+          <!-- Slot 2 -->
+          <div id="client-photo-2" style="
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #dde3ec;
+            border-radius: 12px;
+            border: 2px dashed #aab4c8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          ">
+            <span style="font-size: 24px; color: #8896a8;">📷</span>
+            <span style="font-size: 14px; font-weight: 500; color: #8896a8; margin-top: 8px;">Add Photo</span>
           </div>
 
-          <!-- Card 3 -->
-          <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;">
-            <div style="
-              width: 90px;
-              height: 90px;
-              border-radius: 50%;
-              border: 2px dashed #ccc;
-              margin: 0 auto 20px;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              color: #94a3b8;
-              background: #f0f0f0;
-            ">
-              <span style="font-size: 24px;">📷</span>
-              <span style="font-size: 10px; font-weight: 600; color: #777; margin-top: 4px;">Add Photo</span>
-            </div>
-            <div style="color: #c9a84c; margin: 10px 0; font-size: 20px;">★★★★★</div>
-            <p style="font-family: Inter, sans-serif; font-style: italic; color: #64748b; margin-bottom: 24px; line-height: 1.7;">"Your client testimonial will appear here. This is a placeholder for your client's positive experience with AKFA Real Estate."</p>
-            <h5 style="font-family: 'Playfair Display', serif; color: #020d1f; font-weight: 700; font-size: 1.2rem; margin: 0;">— Client Name</h5>
-            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">Dibrugarh, Assam</p>
+          <!-- Slot 3 -->
+          <div id="client-photo-3" style="
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #dde3ec;
+            border-radius: 12px;
+            border: 2px dashed #aab4c8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          ">
+            <span style="font-size: 24px; color: #8896a8;">📷</span>
+            <span style="font-size: 14px; font-weight: 500; color: #8896a8; margin-top: 8px;">Add Photo</span>
           </div>
 
-          <!-- Card 4 -->
-          <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;">
-            <div style="
-              width: 90px;
-              height: 90px;
-              border-radius: 50%;
-              border: 2px dashed #ccc;
-              margin: 0 auto 20px;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              color: #94a3b8;
-              background: #f0f0f0;
-            ">
-              <span style="font-size: 24px;">📷</span>
-              <span style="font-size: 10px; font-weight: 600; color: #777; margin-top: 4px;">Add Photo</span>
-            </div>
-            <div style="color: #c9a84c; margin: 10px 0; font-size: 20px;">★★★★★</div>
-            <p style="font-family: Inter, sans-serif; font-style: italic; color: #64748b; margin-bottom: 24px; line-height: 1.7;">"Your client testimonial will appear here. This is a placeholder for your client's positive experience with AKFA Real Estate."</p>
-            <h5 style="font-family: 'Playfair Display', serif; color: #020d1f; font-weight: 700; font-size: 1.2rem; margin: 0;">— Client Name</h5>
-            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">Dibrugarh, Assam</p>
+          <!-- Slot 4 -->
+          <div id="client-photo-4" style="
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #dde3ec;
+            border-radius: 12px;
+            border: 2px dashed #aab4c8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          ">
+            <span style="font-size: 24px; color: #8896a8;">📷</span>
+            <span style="font-size: 14px; font-weight: 500; color: #8896a8; margin-top: 8px;">Add Photo</span>
           </div>
         </div>
+
+        <p style="
+          margin-top: 32px;
+          color: #8896a8;
+          font-size: 0.95rem;
+          font-family: Inter, sans-serif;
+        ">Client photos coming soon</p>
       </div>
     </section>
 
