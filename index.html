@@ -1649,24 +1649,24 @@
 </div>
 <div class="flex flex-col justify-center">
 <div class="glass-card p-10 rounded-[2.5rem] bg-white border border-white/10 shadow-2xl">
-<form class="space-y-6">
+<form class="space-y-6" onsubmit="sendToWhatsApp(event)">
 <div class="space-y-2">
-<label for="name">FULL NAME</label>
-<input id="name" placeholder="Your Name" type="text"/>
+<label for="contact-name">FULL NAME</label>
+<input id="contact-name" placeholder="Your Name" type="text" required/>
 </div>
 <div class="space-y-2">
-<label for="phone">PHONE NUMBER</label>
-<input id="phone" placeholder="Phone Number" type="tel"/>
+<label for="contact-phone">PHONE NUMBER</label>
+<input id="contact-phone" placeholder="Phone Number" type="tel" required/>
 </div>
 <div class="space-y-2">
-<label for="message">MESSAGE</label>
-<textarea id="message" placeholder="How can we help?" rows="4"></textarea>
+<label for="contact-message">MESSAGE</label>
+<textarea id="contact-message" placeholder="How can we help?" rows="4"></textarea>
 </div>
 <div class="pt-8">
-<button type="submit">
-                                Send Inquiry
+<button type="submit" style="background-color: #25D366 !important; color: white !important;">
+                                Send via WhatsApp 💬
 </button>
-<p class="text-on-surface-variant text-xs mt-6 text-center" style="color: #64748b !important;">By sending, you agree to our processing of your personal data.</p>
+<p class="text-on-surface-variant text-xs mt-6 text-center" style="color: #64748b !important;">You will be redirected to WhatsApp to complete your inquiry.</p>
 </div>
 </form>
 </div>
@@ -1869,6 +1869,37 @@
 
             showSlides(slideIndex);
         });
+
+        function sendToWhatsApp(event) {
+          event.preventDefault();
+          
+          const name = document.getElementById('contact-name').value.trim() || document.querySelector('input[placeholder="Your Name"]').value.trim();
+          const phone = document.getElementById('contact-phone').value.trim() || document.querySelector('input[placeholder="Phone Number"]').value.trim();
+          const message = document.getElementById('contact-message').value.trim() || document.querySelector('textarea[placeholder="How can we help?"]').value.trim();
+          
+          if (!name || !phone) {
+            alert('Please enter your name and phone number.');
+            return;
+          }
+          
+          const waMessage = `Hello AKFA Real Estate! 🏠
+
+I am interested in your properties and would like to inquire.
+
+👤 *Name:* ${name}
+📞 *Phone:* ${phone}
+💬 *Message:* ${message || 'I would like to know more about your available properties.'}
+
+Please get in touch with me at your earliest convenience.
+
+Thank you!`;
+
+          const encodedMessage = encodeURIComponent(waMessage);
+          const waNumber = '919365566831';
+          const waURL = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+          
+          window.open(waURL, '_blank');
+        }
     </script>
 
 </body></html>
