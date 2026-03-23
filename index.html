@@ -296,6 +296,73 @@
       font-size: clamp(1.8rem, 8vw, 2.5rem);
     }
   }
+
+  /* FIX 1 — HERO TEXT IS INVISIBLE */
+  header h1, header h1 * {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  header h1 .highlight,
+  header h1 em,
+  header h1 i {
+    background: linear-gradient(135deg, #93c5fd, #60a5fa, #3b82f6) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    font-style: italic !important;
+  }
+  header p, header p * {
+    color: rgba(255, 255, 255, 0.75) !important;
+  }
+
+  /* FIX 2 — STAT CARDS (DARK GLASSMORPHISM) */
+  header [class*="glass"],
+  header [class*="card"],
+  header [class*="stat"] {
+    background: rgba(255, 255, 255, 0.07) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 20px !important;
+    color: #ffffff !important;
+  }
+  header [class*="glass"] h2,
+  header [class*="glass"] h3,
+  header [class*="glass"] p,
+  header [class*="card"] h2,
+  header [class*="card"] h3,
+  header [class*="card"] p,
+  header [class*="stat"] h2,
+  header [class*="stat"] h3,
+  header [class*="stat"] p {
+    color: #ffffff !important;
+  }
+  header [class*="book"],
+  header [class*="cta"] {
+    background: rgba(29, 111, 207, 0.15) !important;
+    border: 1px solid rgba(29, 111, 207, 0.35) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: 24px !important;
+    color: #ffffff !important;
+  }
+  header [class*="book"] *,
+  header [class*="cta"] * {
+    color: rgba(255,255,255,0.85) !important;
+  }
+
+  /* FIX 5 — NAVBAR LOGO TEXT COLOR */
+  .glass-nav h1, .glass-nav [class*="brand"],
+  nav h1, nav [class*="brand"] {
+    color: #081b38 !important;
+  }
+  nav a {
+    color: #334155 !important;
+    font-weight: 500 !important;
+  }
+  nav a:hover {
+    color: #1d6fcf !important;
+  }
         .material-symbols-outlined {
             font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
         }
@@ -631,7 +698,7 @@
 <div class="relative">
 <div class="w-80 h-80 md:w-96 md:h-96 rounded-full border-4 border-primary/20 p-4">
 <div class="w-full h-full rounded-full overflow-hidden bg-slate-100 relative">
-<img alt="Akhtar Hussain" class="w-full h-full object-cover" src="gallery/founder.jpg"/>
+<img alt="Akhter Hussain" class="w-full h-full object-cover" src="gallery/founder.jpg"/>
 <!-- Live Pulse Badge -->
 <div class="absolute bottom-8 right-8 flex items-center gap-2 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-green-100">
 <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse-green"></span>
@@ -660,7 +727,7 @@
 <div class="flex flex-col gap-8">
 <div>
 <span class="text-primary text-[12px] font-bold uppercase tracking-[0.2em] mb-4 block">Founder &amp; Owner</span>
-<h3 class="text-5xl md:text-6xl font-headline font-bold text-navy-dark mb-2">Akhtar <span class="italic text-primary">Hussain</span></h3>
+<h3 class="text-5xl md:text-6xl font-headline font-bold text-navy-dark mb-2">Akhter <span class="italic text-primary">Hussain</span></h3>
 <p class="text-on-surface-variant font-medium text-sm flex items-center gap-2">
 <span class="material-symbols-outlined text-sm text-primary">location_on</span>
                             AKFA Real Estate · Dibrugarh, Assam
@@ -683,7 +750,7 @@
 <div class="flex flex-col sm:flex-row gap-4 mt-4">
 <a class="bg-primary text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-navy-dark transition-all shadow-lg shadow-primary/20" href="https://wa.me/919365566831">
 <svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
-                            WhatsApp Akhtar
+                            WhatsApp Akhter
                         </a>
 <button class="border-2 border-primary text-primary px-8 py-4 rounded-full font-bold hover:bg-primary/5 transition-all">
                             View Facebook
@@ -692,6 +759,232 @@
 </div>
 </div>
 </div>
+</section>
+<!-- CEO Section -->
+<section id="ceo" style="
+  padding: 100px 0;
+  background: linear-gradient(135deg, #020d1f 0%, #0a1f3c 50%, #020d1f 100%);
+  position: relative;
+  overflow: hidden;
+">
+  <!-- Background glow -->
+  <div style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(29,111,207,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  "></div>
+
+  <div style="
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    position: relative;
+    z-index: 2;
+  ">
+
+    <!-- Photo side -->
+    <div style="flex-shrink: 0; text-align: center;">
+      <div style="
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        border: 3px solid rgba(29,111,207,0.5);
+        padding: 6px;
+        background: rgba(29,111,207,0.1);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 60px rgba(29,111,207,0.2);
+        overflow: hidden;
+        margin: 0 auto;
+      ">
+        <div style="
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #0a1f3c, #1d4ed8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: 'Playfair Display', serif;
+          font-size: 5rem;
+          color: rgba(255,255,255,0.9);
+          font-weight: 700;
+          letter-spacing: -2px;
+        ">AH</div>
+      </div>
+
+      <!-- CEO badge -->
+      <div style="
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 24px;
+        padding: 8px 20px;
+        background: rgba(29,111,207,0.2);
+        border: 1px solid rgba(29,111,207,0.4);
+        border-radius: 50px;
+        backdrop-filter: blur(10px);
+      ">
+        <span style="
+          width: 8px; height: 8px;
+          background: #60a5fa;
+          border-radius: 50%;
+          display: inline-block;
+          animation: pulse-green 2s ease-in-out infinite;
+        "></span>
+        <span style="color: #93c5fd; font-family: Inter, sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">Available</span>
+      </div>
+    </div>
+
+    <!-- Content side -->
+    <div style="flex: 1;">
+      <p style="
+        font-family: Inter, sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 12px;
+      ">CHIEF EXECUTIVE OFFICER</p>
+
+      <h2 style="
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1.1;
+        margin-bottom: 8px;
+      ">Akhter <span style="
+        background: linear-gradient(135deg, #93c5fd, #60a5fa, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-style: italic;
+      ">Hussain</span></h2>
+
+      <p style="
+        color: rgba(255,255,255,0.5);
+        font-family: Inter, sans-serif;
+        font-size: 0.9rem;
+        margin-bottom: 28px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      ">
+        <span style="color: #60a5fa;">&#9679;</span>
+        AKFA Real Estate · Dibrugarh, Assam
+      </p>
+
+      <p style="
+        color: rgba(255,255,255,0.7);
+        font-family: Inter, sans-serif;
+        font-size: 1rem;
+        line-height: 1.8;
+        margin-bottom: 16px;
+        max-width: 560px;
+      ">
+        As the CEO and driving force behind AKFA Real Estate, Akhter Hussain 
+        has spent over 6 years transforming how families in Dibrugarh experience 
+        property ownership. His leadership is built on a simple promise — 
+        every transaction must be transparent, legal, and stress-free.
+      </p>
+
+      <p style="
+        color: rgba(255,255,255,0.55);
+        font-family: Inter, sans-serif;
+        font-size: 0.95rem;
+        line-height: 1.8;
+        margin-bottom: 36px;
+        max-width: 560px;
+        font-style: italic;
+        border-left: 3px solid rgba(29,111,207,0.5);
+        padding-left: 20px;
+      ">
+        "My goal is simple — every family that works with AKFA should feel 
+        completely confident in their property decision."
+      </p>
+
+      <!-- Stats row -->
+      <div style="display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 36px;">
+        <div>
+          <p style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:#fff; margin:0;">6+</p>
+          <p style="font-family:Inter,sans-serif; font-size:0.78rem; color:rgba(255,255,255,0.5); margin:4px 0 0; letter-spacing:1px; text-transform:uppercase;">Years Experience</p>
+        </div>
+        <div style="width:1px; background:rgba(255,255,255,0.1);"></div>
+        <div>
+          <p style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:#fff; margin:0;">100+</p>
+          <p style="font-family:Inter,sans-serif; font-size:0.78rem; color:rgba(255,255,255,0.5); margin:4px 0 0; letter-spacing:1px; text-transform:uppercase;">Properties Closed</p>
+        </div>
+        <div style="width:1px; background:rgba(255,255,255,0.1);"></div>
+        <div>
+          <p style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:#fff; margin:0;">500+</p>
+          <p style="font-family:Inter,sans-serif; font-size:0.78rem; color:rgba(255,255,255,0.5); margin:4px 0 0; letter-spacing:1px; text-transform:uppercase;">Families Served</p>
+        </div>
+      </div>
+
+      <!-- CTA buttons -->
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="https://wa.me/919365566831" target="_blank" style="
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 14px 28px;
+          background: linear-gradient(135deg, #1d6fcf, #2563eb);
+          color: #ffffff;
+          font-family: Inter, sans-serif;
+          font-weight: 600;
+          font-size: 0.9rem;
+          border-radius: 14px;
+          text-decoration: none;
+          box-shadow: 0 4px 20px rgba(29,111,207,0.4);
+          transition: all 0.3s;
+        ">WhatsApp Akhter</a>
+
+        <a href="tel:9365566831" style="
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 14px 28px;
+          background: rgba(255,255,255,0.07);
+          color: #ffffff;
+          font-family: Inter, sans-serif;
+          font-weight: 600;
+          font-size: 0.9rem;
+          border-radius: 14px;
+          text-decoration: none;
+          border: 1px solid rgba(255,255,255,0.15);
+          backdrop-filter: blur(10px);
+          transition: all 0.3s;
+        ">Call Directly</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile responsive for CEO section -->
+  <style>
+    @media (max-width: 768px) {
+      #ceo > div:last-child {
+        flex-direction: column !important;
+        gap: 40px !important;
+        padding: 0 20px !important;
+      }
+      #ceo > div:last-child > div:first-child {
+        width: 100% !important;
+      }
+      #ceo > div:last-child > div:first-child > div:first-child {
+        width: 200px !important;
+        height: 200px !important;
+      }
+    }
+  </style>
 </section>
 <!-- Featured Properties (Glassified Cards) -->
 <section class="py-32 max-w-[1440px] mx-auto px-8" id="properties">
