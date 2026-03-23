@@ -871,54 +871,68 @@
   const barFill   = document.getElementById('bar-fill');
   const pctText   = document.getElementById('pct-text');
 
-  // Resize canvas to match hero section
   function resizeCanvas() {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    canvas.width  = canvas.offsetWidth  || window.innerWidth;
+    canvas.height = canvas.offsetHeight || window.innerHeight;
     drawFrame(currentFrame);
   }
   window.addEventListener('resize', resizeCanvas);
 
-  // Build frame path with zero-padded number
   function frameSrc(i) {
     const num = String(i + 1).padStart(3, '0');
     return FOLDER + PREFIX + num + EXT;
   }
 
-  // Preload all frames
   const images = new Array(TOTAL);
-  let loaded = 0;
   let currentFrame = 0;
+  let fullLoaded = 0;
 
-  function preload() {
+  // PHASE 1 — Load only every 10th frame (30 frames total)
+  const keyFrames = [];
+  for (let i = 0; i < TOTAL; i += 10) keyFrames.push(i);
+
+  function loadKeyFrames() {
     return new Promise((resolve) => {
-      for (let i = 0; i < TOTAL; i++) {
+      let done = 0;
+      keyFrames.forEach((idx) => {
         const img = new Image();
-        img.onload = () => {
-          loaded++;
-          const pct = Math.round((loaded / TOTAL) * 100);
+        img.onload = img.onerror = () => {
+          done++;
+          const pct = Math.round((done / keyFrames.length) * 100);
           barFill.style.width = pct + '%';
           pctText.textContent = 'Loading... ' + pct + '%';
-          if (loaded === TOTAL) resolve();
+          if (done === keyFrames.length) resolve();
         };
-        img.onerror = () => {
-          loaded++;
-          const pct = Math.round((loaded / TOTAL) * 100);
-          barFill.style.width = pct + '%';
-          pctText.textContent = 'Loading... ' + pct + '%';
-          if (loaded === TOTAL) resolve();
-        };
-        img.src = frameSrc(i);
-        images[i] = img;
-      }
+        img.src = frameSrc(idx);
+        images[idx] = img;
+      });
     });
   }
 
-  // Draw frame cover-fit
+  // PHASE 2 — Load remaining frames silently in background
+  function loadRemainingFrames() {
+    for (let i = 0; i < TOTAL; i++) {
+      if (images[i]) continue;
+      const img = new Image();
+      img.onload = img.onerror = () => { fullLoaded++; };
+      img.src = frameSrc(i);
+      images[i] = img;
+    }
+  }
+
+  // Draw best available frame near idx
   function drawFrame(idx) {
     idx = Math.max(0, Math.min(TOTAL - 1, idx));
     currentFrame = idx;
-    const img = images[idx];
+    let img = images[idx];
+    if (!img || !img.complete || !img.naturalWidth) {
+      for (let offset = 1; offset < 15; offset++) {
+        const lo = images[idx - offset];
+        const hi = images[idx + offset];
+        if (lo && lo.complete && lo.naturalWidth) { img = lo; break; }
+        if (hi && hi.complete && hi.naturalWidth) { img = hi; break; }
+      }
+    }
     if (!img || !img.complete || !img.naturalWidth) return;
     const cw = canvas.width, ch = canvas.height;
     const iw = img.naturalWidth, ih = img.naturalHeight;
@@ -929,33 +943,34 @@
     ctx.drawImage(img, dx, dy, dw, dh);
   }
 
-  // Map scroll to frame
   let rafPending = false;
-
   function onScroll() {
     if (rafPending) return;
     rafPending = true;
     requestAnimationFrame(() => {
       rafPending = false;
       const hero = canvas.closest('section') || canvas.parentElement;
-      const heroRect = hero.getBoundingClientRect();
+      const rect = hero.getBoundingClientRect();
       const heroH = hero.offsetHeight;
-      const scrolled = -heroRect.top;
+      const scrolled = -rect.top;
       const progress = Math.min(Math.max(scrolled / (heroH - window.innerHeight), 0), 1);
       drawFrame(Math.floor(progress * (TOTAL - 1)));
     });
   }
 
-  // Boot sequence
-  preload().then(() => {
-    resizeCanvas();
+  // BOOT
+  loadKeyFrames().then(() => {
     preloader.style.opacity = '0';
-    setTimeout(() => { preloader.style.display = 'none'; }, 600);
+    setTimeout(() => { preloader.style.display = 'none'; }, 500);
+    resizeCanvas();
     drawFrame(0);
     window.addEventListener('scroll', onScroll, { passive: true });
+    setTimeout(loadRemainingFrames, 300);
   });
 
 })();
 </script>
+
+
 
 </body></html>
