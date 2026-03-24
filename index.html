@@ -290,10 +290,12 @@
 
     /* MODAL FIXES */
     #bookingModal .modal-content {
+      width: 90vw !important;
+      max-width: 400px !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
       padding: 24px 16px !important;
       border-radius: 20px !important;
-      width: 92vw !important;
-      max-width: 420px !important;
     }
 
     #bookingModal .modal-content h3 {
@@ -311,11 +313,14 @@
       display: flex !important;
       flex-direction: row !important;
       align-items: center !important;
+      flex-wrap: nowrap !important;
+      overflow: hidden !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
       padding: 14px 16px !important;
-      gap: 12px !important;
+      gap: 10px !important;
       border-radius: 14px !important;
       min-height: unset !important;
-      width: 100% !important;
     }
 
     #bookingModal .modal-content a > div:first-child {
@@ -326,6 +331,8 @@
 
     #bookingModal .modal-content a .flex-1 {
       flex: 1 !important;
+      min-width: 0 !important;
+      overflow: hidden !important;
       display: flex !important;
       flex-direction: column !important;
       gap: 2px !important;
@@ -349,15 +356,19 @@
     }
 
     #bookingModal .modal-content .text-right p {
-      font-size: 14px !important;
-      font-weight: 700 !important;
+      font-size: 13px !important;
       white-space: nowrap !important;
+      flex-shrink: 0 !important;
       margin-left: auto !important;
+      color: #ffffff !important;
+      font-weight: 600 !important;
     }
 
+    #bookingModal .modal-symbols-outlined,
     #bookingModal .modal-content span.material-symbols-outlined {
-      margin-left: 8px !important;
       flex-shrink: 0 !important;
+      margin-left: 6px !important;
+      font-size: 16px !important;
     }
 
     #bookingModal .modal-content .mt-12.pt-8 {
@@ -1820,7 +1831,7 @@
 </div>
 <div>
 <p class="text-primary text-[10px] uppercase font-bold tracking-widest mb-1">Email</p>
-<h6 class="text-xl text-white font-bold">hello@akfarealestate.in</h6>
+<h6 class="text-xl text-white font-bold">akfarealestate3@gmail.com</h6>
 </div>
 </div>
 </div>
