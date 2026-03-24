@@ -293,7 +293,7 @@
       display: flex !important;
       align-items: center !important;
       gap: 12px !important;
-      flex: 1 !important;
+      overflow: hidden !important;
       min-width: 0 !important;
     }
 
@@ -302,21 +302,23 @@
       align-items: center !important;
       gap: 8px !important;
       flex-shrink: 0 !important;
-      margin-left: auto !important; /* Force push to right side */
+      justify-content: flex-end !important;
+      text-align: right !important;
       white-space: nowrap !important;
+      margin-left: 0 !important; /* Grid handles the push */
     }
 
     #bookingModal .modal-content a {
-      display: flex !important;
-      flex-direction: row !important;
+      display: grid !important;
+      grid-template-columns: 1fr auto !important;
       align-items: center !important;
-      justify-content: flex-start !important; /* margin-left: auto handles the push */
       width: 100% !important;
       max-width: 100% !important;
       box-sizing: border-box !important;
       padding: 16px 20px !important;
       border-radius: 14px !important;
       overflow: visible !important;
+      gap: 12px !important;
     }
 
     /* MODAL FIXES (Mobile specific) */
@@ -335,7 +337,7 @@
 
     #bookingModal .modal-content p.uppercase,
     #bookingModal .modal-content p.tracking-widest {
-      font-size: 12px !important;
+      font-size: 11px !important;
       text-transform: none !important;
       letter-spacing: normal !important;
     }
@@ -345,7 +347,7 @@
       white-space: nowrap !important;
       flex-shrink: 0 !important;
       color: #ffffff !important;
-      font-weight: 600 !important;
+      font-weight: 650 !important;
     }
 
     #bookingModal span.material-symbols-outlined {
@@ -359,6 +361,7 @@
     @media (max-width: 768px) {
       #bookingModal .modal-content a {
         padding: 12px 14px !important;
+        gap: 8px !important;
       }
       #bookingModal .modal-content .text-right p {
         font-size: 12px !important;
