@@ -213,13 +213,13 @@
   }
 
   /* ──────────────────────────────────────────────────────────────────────────
-     GLOBAL MODAL STRUCTURAL STYLES (Refined for Stacking)
+     GLOBAL MODAL STRUCTURAL STYLES (Compact & Premium)
      ────────────────────────────────────────────────────────────────────────── */
   .modal-left-section {
     display: flex !important;
     align-items: center !important;
     gap: 12px !important;
-    flex: 1 1 200px !important; /* Allow growing and shrinking but baseline 200px */
+    flex: 1 !important;
     min-width: 0 !important;
     overflow: hidden !important;
   }
@@ -228,57 +228,60 @@
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
+    flex-shrink: 0 !important;
     justify-content: flex-end !important;
     text-align: right !important;
     white-space: nowrap !important;
-    padding-left: 16px !important; /* Min padding from label */
-    flex-shrink: 0 !important;
+    padding-left: 12px !important;
   }
 
   #bookingModal .modal-content a {
     display: flex !important;
-    flex-wrap: wrap !important; /* Allow stacking when space is tight */
+    flex-direction: row !important;
     justify-content: space-between !important;
     align-items: center !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
-    padding: 18px 20px !important;
-    border-radius: 16px !important;
+    padding: 12px 14px !important;
+    border-radius: 14px !important;
     overflow: visible !important;
-    gap: 12px !important;
-    min-height: 72px !important;
+    gap: 8px !important;
+    height: auto !important; /* Content-based auto height */
+    min-height: unset !important;
   }
 
   #bookingModal .modal-content .text-right p {
-    font-size: 14px !important;
+    font-size: 13px !important;
     white-space: nowrap !important;
     color: #ffffff !important;
     font-weight: 700 !important;
-    letter-spacing: 0.025em !important;
+    letter-spacing: 0.01em !important;
+  }
+
+  #bookingModal .modal-content h5 {
+    line-height: 1.2 !important;
+    margin-bottom: 1px !important;
   }
 
   #bookingModal span.material-symbols-outlined {
-    font-size: 20px !important;
+    font-size: 18px !important;
     flex-shrink: 0 !important;
     display: inline-block !important;
     visibility: visible !important;
     opacity: 1 !important;
   }
 
-  /* Specific Stacking for Small Devices */
+  /* Keep mobile alignment simple but compact */
   @media (max-width: 480px) {
     #bookingModal .modal-content a {
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      padding: 16px 16px !important;
-      gap: 10px !important;
+      padding: 10px 12px !important;
     }
     .modal-right-section {
-      width: 100% !important;
-      justify-content: flex-start !important;
-      padding-left: 60px !important; /* Align with text after icon */
-      margin-top: -4px !important;
+      padding-left: 8px !important;
+    }
+    #bookingModal .modal-content .text-right p {
+      font-size: 12px !important;
     }
   }
 
